@@ -1,6 +1,6 @@
-import './About.css';
+import './Intro.css';
 
-export function About() {
+export function Intro() {
   return (
     <section className="about">
       <div className="about-container">

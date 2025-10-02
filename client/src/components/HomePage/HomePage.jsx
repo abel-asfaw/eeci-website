@@ -1,5 +1,5 @@
-import { About } from '../About/About';
+import { Intro } from '../Intro';
 
 export function HomePage() {
-  return <About />;
+  return <Intro />;
 }
