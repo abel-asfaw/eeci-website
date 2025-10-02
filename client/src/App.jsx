@@ -6,32 +6,9 @@ function App() {
     <>
       <Navbar />
       <HomePage />
-      <h1>
-        Under construction...
-      </h1>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
-      <p>You are so special!</p>
+      <h1>Under construction...</h1>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

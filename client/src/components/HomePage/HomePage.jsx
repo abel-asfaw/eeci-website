@@ -1,5 +1,13 @@
-import { About } from '../About/About';
+import { Intro } from '../Intro';
+import { About } from '../About';
+import { Beliefs } from '../Beliefs';
 
 export function HomePage() {
-  return <About />;
+  return (
+    <>
+      <Intro />
+      <About />
+      <Beliefs />
+    </>
+  );
 }

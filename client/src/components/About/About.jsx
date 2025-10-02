@@ -5,12 +5,19 @@ export function About() {
     <section className="about">
       <div className="about-container">
         <h1 className="about-title">
-          Ethiopian Evangelical Church International
+          About Our Church
         </h1>
-        <p className="about-subtitle">
-          You are so special and God LOVES you so much!
+        <p className="about-content">
+          Emmanuel Evangelical Church International (EECI) is a vibrant,
+          multi-generational church with a passion for Jesus, people, and our city.
+          We are a community of believers dedicated to sharing the gospel
+          and love of Christ. Our services are filled with heartfelt worship,
+          practical teaching from the Bible, and a welcoming atmosphere
+          for all. We believe in building strong families and a strong 
+          community, and we offer various ministries for all ages to get
+          connected and grow in their faith. Come as you are and experience
+          the warmth of our church family.
         </p>
-        <button className="about-button">I'M NEW</button>
       </div>
     </section>
   );
