@@ -37,7 +37,7 @@ export function Navbar() {
                 }}
               >
                 <button className="nav-button" disabled={isLoading}>
-                  {isLoading ? 'Loading...' : 'Give'}
+                  Give
                 </button>
               </a>
             )}
