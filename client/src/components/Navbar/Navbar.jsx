@@ -1,49 +1,82 @@
+import { Box, Button, Flex, HStack, Image, Link } from '@chakra-ui/react';
 import eeciLogo from '../../assets/eeci-logo.PNG';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
-import './Navbar.css';
 
 export function Navbar() {
   const { data: siteSettings, isLoading, isError } = useSiteSettings();
 
   return (
-    <header className="header">
-      <nav className="nav-bar">
-        <a href="/" className="logo">
-          <img alt="EECI" src={eeciLogo} />
-        </a>
-        <ul className="nav-links">
+    <Box
+      as="header"
+      position="sticky"
+      top="0"
+      w="100%"
+      bg="white"
+      zIndex="1000"
+      boxShadow="0 2px 1px rgba(185, 185, 185, 0.2)"
+    >
+      <Flex as="nav" mx="auto" px="4" justify="space-between" align="center">
+        <Link href="/">
+          <Image alt="EECI" src={eeciLogo} h="60px" w="auto" />
+        </Link>
+        <HStack as="ul" listStyleType="none" gap="1">
           <li>
-            <button className="nav-button">About</button>
+            <Button
+              variant="ghost"
+              color="text.secondary"
+              fontWeight="500"
+              borderRadius="md"
+              _hover={{ bg: 'text.primary', color: 'white' }}
+            >
+              About
+            </Button>
           </li>
           <li>
-            <button className="nav-button">Visit</button>
+            <Button
+              variant="ghost"
+              color="text.secondary"
+              fontWeight="500"
+              borderRadius="md"
+              _hover={{ bg: 'text.primary', color: 'white' }}
+            >
+              Visit
+            </Button>
           </li>
           <li>
             {isError ? (
-              <button
-                className="nav-button"
+              <Button
+                variant="ghost"
+                color="text.secondary"
+                fontWeight="500"
+                borderRadius="md"
                 disabled
-                style={{ opacity: 0.5, cursor: 'not-allowed' }}
+                opacity="0.5"
+                cursor="not-allowed"
               >
                 Give
-              </button>
+              </Button>
             ) : (
-              <a
+              <Link
                 href={siteSettings?.giveLink}
                 target="_blank"
-                style={{
-                  opacity: isLoading ? 0.5 : 1,
-                  pointerEvents: isLoading ? 'none' : 'auto',
-                }}
+                opacity={isLoading ? 0.5 : 1}
+                pointerEvents={isLoading ? 'none' : 'auto'}
               >
-                <button className="nav-button" disabled={isLoading}>
+                <Button
+                  variant="ghost"
+                  color="text.secondary"
+                  fontWeight="500"
+                  borderRadius="md"
+                  disabled={isLoading}
+                  _hover={{ bg: 'text.primary', color: 'white' }}
+                >
                   Give
-                </button>
-              </a>
+                </Button>
+              </Link>
             )}
           </li>
-        </ul>
-      </nav>
-    </header>
+        </HStack>
+      </Flex>
+    </Box>
   );
 }

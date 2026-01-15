@@ -1,11 +1,21 @@
 import {
+  Box,
+  Card,
+  Container,
+  Heading,
+  HStack,
+  Icon,
+  Link,
+  SimpleGrid,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+import {
   FaChurch,
   FaLocationDot,
   FaPeopleGroup,
   FaHandHoldingHeart,
 } from 'react-icons/fa6';
-
-import './Services.css';
 
 export function InvolvementCard({
   icon,
@@ -14,51 +24,104 @@ export function InvolvementCard({
   children,
   locationLabel,
   cta,
-  className = '',
 }) {
   return (
-    <article className={`inv-card ${className}`.trim()}>
-      <div className="inv-card__inner">
-        {icon ? <div className="inv-card__icon">{icon}</div> : null}
+    <Card.Root
+      h="100%"
+      p="10"
+      borderRadius="card"
+      boxShadow="sm"
+      transition="box-shadow 350ms ease"
+      _hover={{ boxShadow: 'lg' }}
+    >
+      <Card.Body>
+        <VStack align="center" textAlign="center" gap="0">
+          {icon && (
+            <Box color="text.primary" mb="6">
+              {icon}
+            </Box>
+          )}
 
-        <h3 className="inv-card__title">{title}</h3>
+          <Heading
+            as="h3"
+            fontSize="1.5rem"
+            fontWeight="650"
+            color="text.primary"
+            letterSpacing="-0.01em"
+          >
+            {title}
+          </Heading>
 
-        {meta ? <p className="inv-card__meta">{meta}</p> : null}
+          {meta && (
+            <Text mt="3" fontSize="md" color="text.muted">
+              {meta}
+            </Text>
+          )}
 
-        {locationLabel ? (
-          <div className="inv-card__location">
-            <FaLocationDot size={16} />
-            <span>{locationLabel}</span>
-          </div>
-        ) : null}
+          {locationLabel && (
+            <VStack mt="6" gap="2" fontWeight="700" color="text.primary">
+              <Icon as={FaLocationDot} boxSize="4" />
+              <Link
+                href="https://maps.app.goo.gl/AEq7Aw1tntVbsJ5dA"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {locationLabel}
+              </Link>
+            </VStack>
+          )}
 
-        {children ? <div className="inv-card__body">{children}</div> : null}
+          {children && (
+            <Text mt="5" fontSize="md" lineHeight="1.7" color="text.muted">
+              {children}
+            </Text>
+          )}
 
-        {cta ? (
-          <div className="inv-card__cta">
-            {typeof cta === 'string' ? <span>{cta}</span> : cta}
-          </div>
-        ) : null}
-      </div>
-    </article>
+          {cta && (
+            <Text
+              mt="10"
+              fontSize="sm"
+              fontWeight="800"
+              letterSpacing="0.14em"
+              color="brand.600"
+            >
+              {cta}
+            </Text>
+          )}
+        </VStack>
+      </Card.Body>
+    </Card.Root>
   );
 }
 
-export function InvolvementCardsGrid({ children, className = '' }) {
-  return <div className={`inv-grid ${className}`.trim()}>{children}</div>;
+export function InvolvementCardsGrid({ children }) {
+  return (
+    <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 6, md: 8 }}>
+      {children}
+    </SimpleGrid>
+  );
 }
 
-/** Example usage */
 export function Services() {
   return (
-    <section className="about">
-      <div className="inv-page">
+    <Box as="section" bg="bg.primary">
+      <Container maxW="6xl" py="16" px="6">
+        <Heading
+          as="h2"
+          fontSize="2rem"
+          fontWeight="700"
+          color="text.primary"
+          textAlign="center"
+          mb="10"
+        >
+          Get Involved
+        </Heading>
         <InvolvementCardsGrid>
           <InvolvementCard
             icon={<FaChurch size={64} />}
             title="Sunday Worship"
-            meta="9:00 AM - 1:30 PM"
-            locationLabel="Location"
+            meta="1 PM - 3 PM"
+            locationLabel="1010 Saters Ln, Timonium, MD 21093"
           />
 
           <InvolvementCard
@@ -77,7 +140,7 @@ export function Services() {
             Use your gifts to make a difference in the lives of those you touch.
           </InvolvementCard>
         </InvolvementCardsGrid>
-      </div>
-    </section>
+      </Container>
+    </Box>
   );
 }

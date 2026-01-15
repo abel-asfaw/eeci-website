@@ -1,78 +1,94 @@
-import { useSiteSettings } from "../../hooks/useSiteSettings";
-import './Footer.css';
+import { Box, Flex, HStack, IconButton, Link, Text } from '@chakra-ui/react';
+import { FaFacebook, FaYoutube, FaTiktok } from 'react-icons/fa6';
+import { useSiteSettings } from '../../hooks/useSiteSettings';
 
 export function Footer() {
   const { data: siteSettings, isLoading, isError } = useSiteSettings();
 
   return (
-    <footer className="footer">
-      <div className="footer-title">
-        <p>Connect with us.</p>
-      </div>
+    <Box as="footer" textAlign="center" py="8" px="6">
+      <Text fontWeight="bold" mb="4">
+        Connect with us.
+      </Text>
       {isError ? (
-        <div
-          style={{
-            padding: '1rem',
-            textAlign: 'center',
-            color: '#ff6b6b',
-            fontSize: '0.9rem',
-          }}
-        >
-          <p>Unable to load social links</p>
-        </div>
+        <Box py="4" color="error" fontSize="sm">
+          <Text>Unable to load social links</Text>
+        </Box>
       ) : (
         <>
-          <div
-            className="footer-socials"
-            style={{ opacity: isLoading ? 0.5 : 1 }}
-          >
-            <a
-              className="social-facebook"
+          <HStack justify="center" gap="5" opacity={isLoading ? 0.5 : 1}>
+            <Link
               href={siteSettings?.facebookUrl}
               target="_blank"
               aria-disabled={isLoading}
             >
-              <i className="icon facebook"></i>
-            </a>
-            <a
-              className="social-youtube"
+              <IconButton
+                aria-label="Facebook"
+                rounded="full"
+                bg="black"
+                color="white"
+                size="sm"
+                _hover={{ bg: 'gray.700' }}
+              >
+                <FaFacebook />
+              </IconButton>
+            </Link>
+            <Link
               href={siteSettings?.youtubeUrl}
               target="_blank"
               aria-disabled={isLoading}
             >
-              <i className="icon youtube"></i>
-            </a>
-            <a
-              className="social-tiktok"
+              <IconButton
+                aria-label="YouTube"
+                rounded="full"
+                bg="black"
+                color="white"
+                size="sm"
+                _hover={{ bg: 'gray.700' }}
+              >
+                <FaYoutube />
+              </IconButton>
+            </Link>
+            <Link
               href={siteSettings?.tiktokUrl}
               target="_blank"
               aria-disabled={isLoading}
             >
-              <i className="icon tiktok"></i>
-            </a>
-          </div>
-          <div className="footer-links">
-            <a className="page-link" href="/">
+              <IconButton
+                aria-label="TikTok"
+                rounded="full"
+                bg="black"
+                color="white"
+                size="sm"
+                _hover={{ bg: 'gray.700' }}
+              >
+                <FaTiktok />
+              </IconButton>
+            </Link>
+          </HStack>
+          <HStack justify="center" gap="8" my="10">
+            <Link href="/" color="text.secondary" textDecoration="none">
               About
-            </a>
-            <a className="page-link" href="/">
+            </Link>
+            <Link href="/" color="text.secondary" textDecoration="none">
               Visit
-            </a>
-            <a
-              className="page-link"
+            </Link>
+            <Link
               href={siteSettings?.giveLink}
               target="_blank"
-              style={{ opacity: isLoading ? 0.5 : 1 }}
+              color="text.secondary"
+              textDecoration="none"
+              opacity={isLoading ? 0.5 : 1}
               aria-disabled={isLoading}
             >
               Give
-            </a>
-          </div>
+            </Link>
+          </HStack>
         </>
       )}
-      <div className="footer-copyright">
-        <p>@ 2025 EECI</p>
-      </div>
-    </footer>
+      <Text color="text.secondary" fontSize="sm">
+        © 2025 EECI
+      </Text>
+    </Box>
   );
 }

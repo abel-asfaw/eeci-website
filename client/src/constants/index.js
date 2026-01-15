@@ -3,7 +3,7 @@
  */
 export const DEFAULT_SITE_SETTINGS = {
   giveLink:
-    'https://giving.myamplify.io/atestSermonVideoId = extractVideoId(settings.latestSermonUrl)app/giving/setota',
+    'https://giving.myamplify.io/app/giving/setota',
   latestSermonUrl: 'https://www.youtube.com/embed/bngvT0n4ur0',
   sermonsPlaylist:
     'https://www.youtube.com/playlist?list=PL9E02JY5UQ6lney64LW31cxant-Ek_jvt',

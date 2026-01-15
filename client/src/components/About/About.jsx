@@ -1,26 +1,33 @@
-import { useSiteSettings } from "../../hooks/useSiteSettings";
-import './About.css';
+import { Box, Container, Heading, Text, Skeleton } from '@chakra-ui/react';
+import { useSiteSettings } from '../../hooks/useSiteSettings';
 
 export function About() {
   const { data: siteSettings, isLoading, isError } = useSiteSettings();
 
   return (
-    <section className="about">
-      <div className="about-container">
-        <h1 className="about-title">About Our Church</h1>
+    <Box as="section" bg="bg.primary" textAlign="center" py="16" px="6">
+      <Container maxW="800px">
+        <Heading
+          as="h2"
+          fontSize="2rem"
+          fontWeight="700"
+          color="text.primary"
+          mb="4"
+        >
+          About Our Church
+        </Heading>
         {isError ? (
-          <p
-            className="about-content"
-            style={{ color: '#ff6b6b', fontStyle: 'italic' }}
-          >
+          <Text color="error" fontStyle="italic">
             Unable to load content. Please try again later.
-          </p>
+          </Text>
+        ) : isLoading ? (
+          <Skeleton height="60px" borderRadius="md" />
         ) : (
-          <p className="about-content" style={{ opacity: isLoading ? 0.5 : 1 }}>
-            {isLoading ? 'Loading...' : siteSettings?.aboutText}
-          </p>
+          <Text fontSize="md" color="text.secondary">
+            {siteSettings?.aboutText}
+          </Text>
         )}
-      </div>
-    </section>
+      </Container>
+    </Box>
   );
 }
