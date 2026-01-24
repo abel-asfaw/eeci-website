@@ -15,7 +15,7 @@ export function Intro({ title, subtitle, children, backgroundImage }) {
         ? {
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center 250%',
+            backgroundPosition: 'center bottom',
             backgroundAttachment: { base: 'scroll', md: 'fixed' },
             backgroundRepeat: 'no-repeat',
           }

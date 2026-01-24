@@ -1,5 +1,5 @@
 import { Box, Flex, HStack, IconButton, Link, Text } from '@chakra-ui/react';
-import { FaFacebook, FaYoutube, FaTiktok } from 'react-icons/fa6';
+import { FaFacebookF, FaYoutube, FaTiktok } from 'react-icons/fa6';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
 
 export function Footer() {
@@ -30,7 +30,7 @@ export function Footer() {
                 size="sm"
                 _hover={{ bg: 'gray.700' }}
               >
-                <FaFacebook />
+                <FaFacebookF />
               </IconButton>
             </Link>
             <Link
@@ -67,7 +67,7 @@ export function Footer() {
             </Link>
           </HStack>
           <HStack justify="center" gap="8" my="10">
-            <Link href="/" color="text.secondary" textDecoration="none">
+            <Link href="/about" color="text.secondary" textDecoration="none">
               About
             </Link>
             <Link href="/" color="text.secondary" textDecoration="none">
@@ -87,7 +87,7 @@ export function Footer() {
         </>
       )}
       <Text color="text.secondary" fontSize="sm">
-        © 2025 EECI
+        © 2026 EECI
       </Text>
     </Box>
   );
