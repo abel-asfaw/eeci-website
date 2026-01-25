@@ -4,7 +4,7 @@ import { Section } from '../ui';
 
 export function Sermon({ bg, title, sermonPlaylist, loading }) {
   return (
-    <Section bg={bg} size="md" title={title}>
+    <Section bg={bg} size="lg" title={title}>
       {loading ? (
         <Skeleton height="0" pb="56.25%" borderRadius="lg" />
       ) : (
