@@ -1,58 +1,30 @@
-import {
-  AspectRatio,
-  Box,
-  Container,
-  Heading,
-  Skeleton,
-  Text,
-} from '@chakra-ui/react';
+import { AspectRatio, Skeleton, Text } from '@chakra-ui/react';
 import { extractPlaylistId } from '../../utils';
+import { Section } from '../ui';
 
-export function Sermon({ bg, title, subtitle, sermonPlaylist, loading }) {
+export function Sermon({ bg, title, sermonPlaylist, loading }) {
   return (
-    <Box as="section" bg={bg} py="16" px="6" textAlign="center">
-      <Container maxW="900px">
-        {' '}
-        {/* md size */}
-        <Text
-          textTransform="uppercase"
-          fontSize="sm"
-          letterSpacing="wide"
-          color="text.muted"
-          mb="2"
+    <Section bg={bg} size="md" title={title}>
+      {loading ? (
+        <Skeleton height="0" pb="56.25%" borderRadius="lg" />
+      ) : (
+        <AspectRatio
+          ratio={16 / 9}
+          borderRadius="lg"
+          overflow="hidden"
+          boxShadow="lg"
         >
-          {subtitle}
-        </Text>
-        <Heading
-          as="h2"
-          fontSize="1.75rem"
-          fontWeight="700"
-          color="text.primary"
-          mb="8"
-        >
-          {title}
-        </Heading>
-        {loading ? (
-          <Skeleton height="0" pb="56.25%" borderRadius="lg" />
-        ) : (
-          <AspectRatio
-            ratio={16 / 9}
-            borderRadius="lg"
-            overflow="hidden"
-            boxShadow="lg"
-          >
-            <iframe
-              src={`https://www.youtube.com/embed/videoseries?list=${extractPlaylistId(
-                sermonPlaylist,
-              )}`}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            />
-          </AspectRatio>
-        )}
-      </Container>
-    </Box>
+          <iframe
+            src={`https://www.youtube.com/embed/videoseries?list=${extractPlaylistId(
+              sermonPlaylist,
+            )}`}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </AspectRatio>
+      )}
+    </Section>
   );
 }

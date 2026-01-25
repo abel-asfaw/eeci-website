@@ -21,7 +21,6 @@ export function Section({
   px = '6',
   textAlign = 'center',
   // Heading props
-  label,
   title,
   headingAs = 'h2',
   headingSize = '2rem',
@@ -38,18 +37,6 @@ export function Section({
   return (
     <Box as="section" bg={bg} textAlign={textAlign} py={py} px={px}>
       <Container maxW={maxW}>
-        {label && (
-          <Text
-            fontSize="sm"
-            color="text.muted"
-            textTransform="uppercase"
-            letterSpacing="wide"
-            mb="2"
-          >
-            {label}
-          </Text>
-        )}
-
         {title && (
           <Heading
             as={headingAs}

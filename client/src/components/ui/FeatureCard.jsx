@@ -22,8 +22,8 @@ export function FeatureCard({
 }) {
   return (
     <Card.Root
-      h="100%"
-      p={padding}
+      height="100%"
+      padding={padding}
       borderRadius="card"
       boxShadow="sm"
       transition="box-shadow 350ms ease"
@@ -48,7 +48,7 @@ export function FeatureCard({
 
           {cta && (
             <Text
-              mt="6"
+              marginTop="6"
               fontSize="sm"
               fontWeight="800"
               letterSpacing="0.10em"
