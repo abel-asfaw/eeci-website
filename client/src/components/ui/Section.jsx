@@ -1,4 +1,5 @@
 import { Box, Container, Heading, Skeleton, Text } from '@chakra-ui/react';
+import { ERROR_MESSAGES } from '../../constants';
 
 /**
  * Standardized section wrapper with optional heading and loading/error states.
@@ -27,7 +28,6 @@ export function Section({
   // Loading/error state props
   isLoading = false,
   isError = false,
-  errorMessage = 'Unable to load content. Please try again later.',
   skeletonHeight = '60px',
   // Content
   children,
@@ -57,7 +57,7 @@ export function Section({
 
         {isError ? (
           <Text color="error" fontStyle="italic">
-            {errorMessage}
+            {ERROR_MESSAGES.generic}
           </Text>
         ) : isLoading ? (
           <Skeleton height={skeletonHeight} borderRadius="md" />

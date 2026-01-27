@@ -2,7 +2,6 @@ import { Box, Text } from '@chakra-ui/react';
 import ReactMarkdown from 'react-markdown';
 import { Section } from '../ui';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
-import { ERROR_MESSAGES } from '../../constants';
 
 const markdownStyles = {
   p: ({ children }) => <Text marginBottom="4">{children}</Text>,
@@ -36,7 +35,6 @@ export function Vision({ bg }) {
       title="Our Vision"
       isLoading={isLoading}
       isError={isError}
-      errorMessage={ERROR_MESSAGES.generic}
       skeletonHeight="100px"
     >
       <Box fontSize="md" color="text.secondary" lineHeight="1.8">

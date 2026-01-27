@@ -1,7 +1,6 @@
 import { Text } from '@chakra-ui/react';
 import { Section, OutlineButton } from '../ui';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
-import { ERROR_MESSAGES } from '../../constants';
 
 export function Beliefs({ bg }) {
   const { data: siteSettings, isLoading, isError } = useSiteSettings();
@@ -13,7 +12,6 @@ export function Beliefs({ bg }) {
       title="Our Beliefs"
       isLoading={isLoading}
       isError={isError}
-      errorMessage={ERROR_MESSAGES.generic}
     >
       <Text fontSize="md" color="text.secondary" marginBottom="8">
         {siteSettings?.beliefsText}

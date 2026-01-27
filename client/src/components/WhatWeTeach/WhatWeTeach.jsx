@@ -1,7 +1,6 @@
-import { Box, Skeleton, Text, VStack, Heading } from '@chakra-ui/react';
+import { Box, Text, VStack, Heading } from '@chakra-ui/react';
 import { Section } from '../ui';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
-import { ERROR_MESSAGES } from '../../constants';
 import { Carousel, IconButton } from '@chakra-ui/react';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 
@@ -16,7 +15,6 @@ export function WhatWeTeach({ bg }) {
       title="What We Teach"
       isLoading={isLoading}
       isError={isError}
-      errorMessage={ERROR_MESSAGES.values}
       skeletonHeight="300px"
     >
       <Carousel.Root slideCount={values.length} maxWidth="lg" marginX="auto">
