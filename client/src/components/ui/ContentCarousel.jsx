@@ -43,15 +43,29 @@ export function ContentCarousel({ items }) {
         </Carousel.ItemGroup>
 
         <Carousel.Control justifyContent="center" gap="4" marginTop="6">
-          <Carousel.PrevTrigger asChild>
+          <Carousel.PrevTrigger
+            asChild
+            backgroundColor="bg.primary"
+            borderWidth="1.5px"
+          >
             <IconButton size="sm" variant="outline">
               <LuChevronLeft />
             </IconButton>
           </Carousel.PrevTrigger>
 
-          <Carousel.Indicators />
+          <Carousel.Indicators
+            borderWidth="1px"
+            borderColor="border.emphasized"
+            _current={{
+              borderWidth: 0,
+            }}
+          />
 
-          <Carousel.NextTrigger asChild>
+          <Carousel.NextTrigger
+            asChild
+            backgroundColor="bg.primary"
+            borderWidth="1.5px"
+          >
             <IconButton size="sm" variant="outline">
               <LuChevronRight />
             </IconButton>
