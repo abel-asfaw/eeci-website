@@ -17,10 +17,13 @@ export function OutlineButton({ children, inverted = false, ...props }) {
       borderColor={borderColor}
       color={color}
       paddingX="6"
-      paddingY="5"
-      borderRadius="md"
-      fontWeight="500"
-      _hover={{ background: hoverBg, color: hoverColor }}
+      paddingY="4"
+      rounded="full"
+      boxShadow="md"
+      _hover={{
+        background: hoverBg,
+        color: hoverColor,
+      }}
       {...props}
     >
       {children}

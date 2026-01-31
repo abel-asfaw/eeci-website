@@ -35,6 +35,7 @@ export function Section({
   isLoading = false,
   isError = false,
   skeletonHeight = '60px',
+  justifyContent = 'center',
   // Content
   children,
 }) {
@@ -47,6 +48,7 @@ export function Section({
       textAlign={textAlign}
       paddingY={paddingY}
       paddingX={paddingX}
+      justifyContent={justifyContent}
     >
       <Container maxWidth={maxWidth}>
         {title && (
