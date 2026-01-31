@@ -13,8 +13,8 @@ export function Navbar() {
       top="0"
       width="100%"
       background="white"
-      zIndex="1000"
-      boxShadow="0 2px 1px rgba(185, 185, 185, 0.2)"
+      boxShadow="md"
+      zIndex="100"
     >
       <Flex
         as="nav"
