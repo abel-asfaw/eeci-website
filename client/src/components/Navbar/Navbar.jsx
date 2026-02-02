@@ -35,9 +35,8 @@ export function Navbar() {
           <Button
             asChild
             fontWeight="500"
-            borderRadius="md"
+            rounded="full"
             disabled={isLoading || isError}
-            _hover={{ background: 'text.primary', color: 'white' }}
           >
             <Link
               href={siteSettings?.giveLink}
