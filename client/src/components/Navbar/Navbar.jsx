@@ -2,8 +2,11 @@ import { Box, Button, Flex, HStack, Image, Link } from '@chakra-ui/react';
 import eeciLogo from '../../assets/eeci-logo.PNG';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
 import { NAVIGATION_LINKS } from '../../constants';
+import { OutlineButton } from '../ui';
+import { useNavigate } from 'react-router-dom';
 
 export function Navbar() {
+  const navigate = useNavigate();
   const { data: siteSettings, isLoading, isError } = useSiteSettings();
 
   return (
@@ -23,16 +26,16 @@ export function Navbar() {
         justify="space-between"
         align="center"
       >
-        <Link href="/">
+        <Link onClick={() => navigate('/')}>
           <Image alt="EECI" src={eeciLogo} height="60px" width="auto" />
         </Link>
         <HStack as="ul" listStyleType="none" gap="8">
           {NAVIGATION_LINKS.map(({ label, href }) => (
-            <Link key={label} href={href}>
+            <Link key={label} onClick={() => navigate(href)}>
               {label}
             </Link>
           ))}
-          <Button
+          <OutlineButton
             asChild
             fontWeight="500"
             rounded="full"
@@ -51,7 +54,7 @@ export function Navbar() {
             >
               Give
             </Link>
-          </Button>
+          </OutlineButton>
         </HStack>
       </Flex>
     </Box>
