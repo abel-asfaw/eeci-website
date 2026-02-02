@@ -5,5 +5,6 @@ export function useVerseOfTheDay(version = 'NASB') {
   return useQuery({
     queryKey: ['verseOfTheDay', version],
     queryFn: () => fetchVerseOfTheDay(version),
+    staleTime: Infinity,
   });
 }
