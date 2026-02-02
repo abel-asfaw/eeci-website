@@ -1,11 +1,14 @@
 import { AspectRatio, Skeleton, Text } from '@chakra-ui/react';
 import { extractPlaylistId } from '../../utils';
 import { Section } from '../ui';
+import { useSiteSettings } from '../../hooks/useSiteSettings';
 
-export function Sermon({ bg, title, sermonPlaylist, loading }) {
+export function Sermon({ bg }) {
+  const { data: siteSettings, isLoading } = useSiteSettings();
+
   return (
-    <Section bg={bg} size="lg" title={title}>
-      {loading ? (
+    <Section bg={bg} size="lg" title="Watch Our Last Sermon">
+      {isLoading ? (
         <Skeleton height="0" paddingBottom="56.25%" borderRadius="lg" />
       ) : (
         <AspectRatio
@@ -16,7 +19,7 @@ export function Sermon({ bg, title, sermonPlaylist, loading }) {
         >
           <iframe
             src={`https://www.youtube.com/embed/videoseries?list=${extractPlaylistId(
-              sermonPlaylist,
+              siteSettings.sermonsPlaylist,
             )}`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

@@ -9,7 +9,7 @@ import { useSiteSettings } from '../../hooks/useSiteSettings';
 import { OutlineButton } from '../../components/ui';
 
 export function HomePage() {
-  const { data: siteSettings, isLoading, isError } = useSiteSettings();
+  const { data: siteSettings } = useSiteSettings();
 
   return (
     <Box>
@@ -21,19 +21,7 @@ export function HomePage() {
         <OutlineButton inverted>I'M NEW</OutlineButton>
       </Intro>
       <About bg="bg.secondary" />
-      {isError ? (
-        <Box py="8" textAlign="center" color="error">
-          <Text>Unable to load latest sermon. Please try again later.</Text>
-        </Box>
-      ) : (
-        <Sermon
-          bg="bg.primary"
-          subtitle="Latest message"
-          title="Watch Our Last Sermon"
-          sermonPlaylist={siteSettings?.sermonsPlaylist}
-          loading={isLoading}
-        />
-      )}
+      <Sermon bg="bg.primary" />
       <Beliefs bg="bg.secondary" />
       <Services bg="bg.primary" />
       <Verse bg="bg.secondary" />
