@@ -9,8 +9,6 @@ export function Services({ bg }) {
 
   const backgroundImage = siteSettings?.backgroundImage;
 
-  // Use Contentful data if available, otherwise use fallback
-
   return (
     <Section bg={bg} size="lg" title="Get Involved">
       <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 6, md: 8 }}>
@@ -20,7 +18,7 @@ export function Services({ bg }) {
             items={carousel.cards.map((card) => ({
               ...card,
               // Use card's background image, fallback to siteSettings background
-              backgroundImage: card.backgroundImage || backgroundImage,
+              backgroundImage: card.backgroundImage ?? backgroundImage,
             }))}
           />
         ))}
