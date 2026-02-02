@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react';
+import { Link, Text } from '@chakra-ui/react';
 import { Section, OutlineButton } from '../ui';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
 
@@ -16,7 +16,9 @@ export function Beliefs({ bg }) {
       <Text fontSize="md" color="text.secondary" marginBottom="8">
         {siteSettings?.beliefsText}
       </Text>
-      <OutlineButton>LEARN MORE</OutlineButton>
+      <OutlineButton asChild>
+        <Link href="/about">LEARN MORE</Link>
+      </OutlineButton>
     </Section>
   );
 }
