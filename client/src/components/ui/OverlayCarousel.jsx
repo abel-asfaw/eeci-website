@@ -49,7 +49,7 @@ export function OverlayCarousel({ items }) {
                 backgroundPosition="center"
                 backgroundSize="cover"
                 backgroundRepeat="no-repeat"
-                backgroundImage={`linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 240, 225, 0.85)), url(${item.backgroundImage})`}
+                backgroundImage={`linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 240, 225, 0.8)), url(${item.backgroundImage})`}
               >
                 <VStack gap="4" paddingX="12" paddingY="8" textAlign="center">
                   {item.title && (

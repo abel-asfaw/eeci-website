@@ -12,16 +12,18 @@ export function Services({ bg }) {
   return (
     <Section bg={bg} size="lg" title="Get Involved">
       <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 6, md: 8 }}>
-        {carousels?.map((carousel) => (
-          <OverlayCarousel
-            key={carousel.id}
-            items={carousel.cards.map((card) => ({
-              ...card,
-              // Use card's background image, fallback to siteSettings background
-              backgroundImage: card.backgroundImage ?? backgroundImage,
-            }))}
-          />
-        ))}
+        {carousels
+          ?.sort((carousel) => carousel.order)
+          .map((carousel) => (
+            <OverlayCarousel
+              key={carousel.id}
+              items={carousel.cards.map((card) => ({
+                ...card,
+                // Use card's background image, fallback to siteSettings background
+                backgroundImage: card.backgroundImage ?? backgroundImage,
+              }))}
+            />
+          ))}
       </SimpleGrid>
     </Section>
   );
