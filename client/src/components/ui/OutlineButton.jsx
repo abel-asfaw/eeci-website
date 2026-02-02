@@ -6,9 +6,9 @@ import { Button } from '@chakra-ui/react';
  * @param {boolean} inverted - Use white border/text for dark backgrounds
  */
 export function OutlineButton({ children, inverted = false, ...props }) {
-  const borderColor = inverted ? 'white' : 'text.primary';
-  const color = inverted ? 'white' : 'text.primary';
-  const hoverBg = inverted ? 'white' : 'text.primary';
+  const borderColor = inverted ? 'white' : 'gray.800';
+  const color = inverted ? 'white' : 'gray.800';
+  const hoverBg = inverted ? 'white' : 'gray.800';
   const hoverColor = inverted ? 'gray.800' : 'white';
 
   return (
