@@ -1,6 +1,9 @@
-import { Box, Container } from '@chakra-ui/react';
+import { Box, Container, Text, Link, Spinner } from '@chakra-ui/react';
+import { useVerseOfTheDay } from '../../hooks/useVerseOfTheDay';
 
 export function Verse({ bg }) {
+  const { data: verse, isLoading, isError } = useVerseOfTheDay('NIV');
+
   return (
     <Box
       as="section"
@@ -10,29 +13,33 @@ export function Verse({ bg }) {
       paddingX="6"
     >
       <Container maxWidth="800px">
-        <Box
-          css={{
-            '& .dailyVerses.bibleText': {
-              fontSize: '1rem',
-              fontStyle: 'italic',
-              color: '#4b5563',
-            },
-            '& .dailyVerses.bibleVerse': {
-              fontWeight: 'bold',
-              marginTop: '1em',
-            },
-            '& .dailyVerses.bibleVerse a': {
-              color: '#111827',
-            },
-          }}
-        >
-          <div id="dailyVersesWrapper"></div>
-          <script
-            async
-            defer
-            src="https://dailyverses.net/get/verse.js?language=nasb"
-          />
-        </Box>
+        {isLoading && <Spinner size="lg" color="gray.600" />}
+
+        {isError && (
+          <Text color="red.500">Failed to load verse of the day</Text>
+        )}
+
+        {verse && (
+          <Box>
+            <Text
+              fontSize="lg"
+              fontStyle="italic"
+              color="gray.600"
+              marginBottom="4"
+              dangerouslySetInnerHTML={{ __html: verse.text }}
+            />
+            <Link
+              href={verse.permalink}
+              fontWeight="bold"
+              target="_blank"
+              rel="noopener noreferrer"
+              color="gray.900"
+              _hover={{ textDecoration: 'underline' }}
+            >
+              {verse.displayReference}
+            </Link>
+          </Box>
+        )}
       </Container>
     </Box>
   );
