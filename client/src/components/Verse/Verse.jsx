@@ -2,7 +2,7 @@ import { Box, Container, Text, Link, Spinner } from '@chakra-ui/react';
 import { useVerseOfTheDay } from '../../hooks/useVerseOfTheDay';
 
 export function Verse({ bg }) {
-  const { data: verse, isLoading, isError } = useVerseOfTheDay('NIV');
+  const { data: verse, isLoading, isError } = useVerseOfTheDay();
 
   return (
     <Box
