@@ -10,9 +10,9 @@ export function Footer() {
   const { data: siteSettings, isLoading, isError } = useSiteSettings();
 
   const socialLinks = [
+    { href: siteSettings?.youtubeUrl, icon: FaYoutube, label: 'YouTube' },
     { href: siteSettings?.facebookUrl, icon: FaFacebook, label: 'Facebook' },
     { href: siteSettings?.instagramUrl, icon: FaInstagram, label: 'Instagram' },
-    { href: siteSettings?.youtubeUrl, icon: FaYoutube, label: 'YouTube' },
     { href: siteSettings?.tiktokUrl, icon: FaTiktok, label: 'TikTok' },
   ];
 
