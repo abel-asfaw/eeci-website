@@ -1,5 +1,4 @@
-import { AspectRatio, Skeleton, Text } from '@chakra-ui/react';
-import { extractPlaylistId } from '../../utils';
+import { AspectRatio, Skeleton } from '@chakra-ui/react';
 import { Section } from '../ui';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
 
@@ -18,9 +17,7 @@ export function Sermon({ bg }) {
           boxShadow="lg"
         >
           <iframe
-            src={`https://www.youtube.com/embed/videoseries?list=${extractPlaylistId(
-              siteSettings.sermonsPlaylist,
-            )}`}
+            src={siteSettings.sermonsPlaylist}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
