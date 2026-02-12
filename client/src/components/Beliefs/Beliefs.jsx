@@ -1,4 +1,4 @@
-import { Link, Text } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import { Section, OutlineButton } from '../ui';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
 import { useNavigate } from 'react-router-dom';

@@ -7,6 +7,8 @@ export function Intro({ title, subtitle, children, backgroundImage }) {
     <Box
       as="section"
       position="relative"
+      display="flex"
+      alignItems="center"
       textAlign="center"
       paddingY={{ base: '20', md: '32' }}
       paddingX="6"
