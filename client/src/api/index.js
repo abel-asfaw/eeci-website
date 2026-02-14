@@ -102,3 +102,33 @@ export async function fetchVerseOfTheDay(version = 'NASB') {
     date: data.votd.date,
   };
 }
+
+export async function fetchVisitSettings() {
+  const response = await contentfulClient.getEntries({
+    content_type: 'visitSettings',
+    limit: 1,
+  });
+
+  if (!response) {
+    throw new Error('Failed to fetch visit settings');
+  }
+
+  if (response.items.length === 0) {
+    console.warn('[Contentful] No visitSettings entries found, using defaults');
+    return {};
+  }
+
+  const visitSettings = response.items[0].fields;
+
+  // Contentful media assets have nested structure: asset.fields.file.url
+  const backgroundImageUrl = visitSettings.backgroundImage?.fields?.file?.url;
+
+  const churchImageUrl = visitSettings.churchImage?.fields?.file?.url;
+
+  return {
+    directionsLink: visitSettings.directionsLink,
+    locationTimesText: visitSettings.locationTimesText,
+    churchImage: churchImageUrl,
+    backgroundImage: backgroundImageUrl,
+  };
+}
