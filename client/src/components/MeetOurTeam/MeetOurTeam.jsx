@@ -2,10 +2,12 @@ import {
   Box,
   Carousel,
   Flex,
+  HStack,
   Heading,
   IconButton,
   Text,
   VStack,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
 import { Section } from '../ui';
@@ -24,8 +26,8 @@ function TeamCard({ name, role, photo }) {
   return (
     <Box
       position="relative"
-      w="280px"
-      h="350px"
+      w="full"
+      h="400px"
       borderRadius="lg"
       boxShadow="sm"
       overflow="hidden"
@@ -76,8 +78,8 @@ function TeamCard({ name, role, photo }) {
         bottom="0"
         left="0"
         right="0"
-        h="100%"
-        bg="linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 40%, transparent 100%)"
+        height="100%"
+        background="linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 40%, transparent 100%)"
         opacity="0"
         transition="opacity 300ms ease"
         align="flex-end"
@@ -96,6 +98,59 @@ function TeamCard({ name, role, photo }) {
   );
 }
 
+function TeamCarousel({ teamMembers }) {
+  const slidesPerPage = useBreakpointValue({ base: 1, md: 2, lg: 3 });
+
+  return (
+    <Carousel.Root
+      slideCount={teamMembers.length}
+      slidesPerPage={slidesPerPage}
+      slidesPerMove={1}
+      spacing="24px"
+      allowMouseDrag
+    >
+      <HStack justify="flex-end" marginBottom="4">
+        <HStack>
+          <Carousel.PrevTrigger asChild>
+            <IconButton
+              size="sm"
+              variant="outline"
+              rounded="full"
+              backgroundColor="bg.primary"
+              borderWidth="1.5px"
+            >
+              <LuChevronLeft />
+            </IconButton>
+          </Carousel.PrevTrigger>
+          <Carousel.NextTrigger asChild>
+            <IconButton
+              size="sm"
+              variant="outline"
+              rounded="full"
+              backgroundColor="bg.primary"
+              borderWidth="1.5px"
+            >
+              <LuChevronRight />
+            </IconButton>
+          </Carousel.NextTrigger>
+        </HStack>
+      </HStack>
+
+      <Carousel.ItemGroup>
+        {teamMembers.map((member, index) => (
+          <Carousel.Item key={index} index={index}>
+            <TeamCard
+              name={member.name}
+              role={member.role}
+              photo={member.photo}
+            />
+          </Carousel.Item>
+        ))}
+      </Carousel.ItemGroup>
+    </Carousel.Root>
+  );
+}
+
 export function MeetOurTeam({ bg }) {
   const { data: siteSettings, isLoading, isError } = useSiteSettings();
   const teamMembers = siteSettings?.teamMembersJson || [];
@@ -109,41 +164,7 @@ export function MeetOurTeam({ bg }) {
       skeletonHeight="350px"
       size="lg"
     >
-      {teamMembers.length > 0 && (
-        <Carousel.Root slideCount={teamMembers.length} align="center">
-          <Carousel.Control justifyContent="center" gap="4" marginBottom="6">
-            <Carousel.PrevTrigger asChild backgroundColor="bg.primary" borderWidth="1.5px">
-              <IconButton size="sm" variant="outline" rounded="full">
-                <LuChevronLeft />
-              </IconButton>
-            </Carousel.PrevTrigger>
-
-            <Carousel.Indicators
-              borderWidth="1px"
-              borderColor="border.emphasized"
-              _current={{ borderWidth: 0 }}
-            />
-
-            <Carousel.NextTrigger asChild backgroundColor="bg.primary" borderWidth="1.5px">
-              <IconButton size="sm" variant="outline" rounded="full">
-                <LuChevronRight />
-              </IconButton>
-            </Carousel.NextTrigger>
-          </Carousel.Control>
-
-          <Carousel.ItemGroup overflow="overlay" gap="6">
-            {teamMembers.map((member, index) => (
-              <Carousel.Item key={index} index={index}>
-                <TeamCard
-                  name={member.name}
-                  role={member.role}
-                  photo={member.photo}
-                />
-              </Carousel.Item>
-            ))}
-          </Carousel.ItemGroup>
-        </Carousel.Root>
-      )}
+      {teamMembers.length > 0 && <TeamCarousel teamMembers={teamMembers} />}
     </Section>
   );
 }
