@@ -4,10 +4,10 @@
 
 import contentfulClient from '../clients';
 
-function optimizeContentfulImage(url) {
+function optimizeContentfulImage(url, quality) {
   if (!url) return url;
   const separator = url.includes('?') ? '&' : '?';
-  return `${url}${separator}fm=webp&q=75`;
+  return `${url}${separator}fm=webp&q=${quality ?? 75}`;
 }
 
 export async function fetchSiteSettings() {
@@ -51,7 +51,7 @@ export async function fetchSiteSettings() {
       photo: optimizeContentfulImage(member.photo),
     })),
     backgroundImage: optimizeContentfulImage(backgroundImageUrl),
-    logoImage: optimizeContentfulImage(logoImageUrl),
+    logoImage: optimizeContentfulImage(logoImageUrl, 50),
   };
 }
 
