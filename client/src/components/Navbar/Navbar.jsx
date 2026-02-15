@@ -27,35 +27,39 @@ export function Navbar() {
       >
         <Link asChild>
           <RouterLink to="/">
-            <Image alt="EECI" src={eeciLogo} height="60px" width="auto" />
+            <Image alt="EECI" src={eeciLogo} height="60px" width="60px" />
           </RouterLink>
         </Link>
         <HStack as="ul" listStyleType="none" gap="8">
           {NAVIGATION_LINKS.map(({ label, href }) => (
-            <Link key={label} asChild>
-              <RouterLink to={href}>{label}</RouterLink>
-            </Link>
+            <Box as="li" key={label}>
+              <Link asChild>
+                <RouterLink to={href}>{label}</RouterLink>
+              </Link>
+            </Box>
           ))}
-          <OutlineButton
-            color="white"
-            backgroundColor="gray.900"
-            asChild
-            disabled={isLoading || isError}
-          >
-            <Link
-              href={siteSettings?.giveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-disabled={isError ? '' : undefined}
-              onClick={(e) => {
-                if (isError) {
-                  e.preventDefault();
-                }
-              }}
+          <Box as="li">
+            <OutlineButton
+              color="white"
+              backgroundColor="gray.900"
+              asChild
+              disabled={isLoading || isError}
             >
-              Give
-            </Link>
-          </OutlineButton>
+              <Link
+                href={siteSettings?.giveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-disabled={isError ? '' : undefined}
+                onClick={(e) => {
+                  if (isError) {
+                    e.preventDefault();
+                  }
+                }}
+              >
+                Give
+              </Link>
+            </OutlineButton>
+          </Box>
         </HStack>
       </Flex>
     </Box>

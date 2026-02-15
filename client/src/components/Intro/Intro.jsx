@@ -1,4 +1,4 @@
-import { Box, Container, Heading, Text } from '@chakra-ui/react';
+import { Box, Container, Heading, Image, Text } from '@chakra-ui/react';
 
 export function Intro({ title, subtitle, children, backgroundImage }) {
   const hasBackground = !!backgroundImage;
@@ -13,16 +13,28 @@ export function Intro({ title, subtitle, children, backgroundImage }) {
       paddingY={{ base: '20', md: '32' }}
       paddingX="6"
       minHeight={hasBackground ? { base: '400px', md: '500px' } : 'auto'}
+      overflow="hidden"
       {...(hasBackground
-        ? {
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center bottom',
-            backgroundAttachment: { base: 'scroll', md: 'fixed' },
-            backgroundRepeat: 'no-repeat',
-          }
+        ? { clipPath: 'inset(0)' }
         : { background: 'bg.primary' })}
     >
+      {/* Background image as <img> for preload scanner visibility */}
+      {hasBackground && (
+        <Image
+          src={backgroundImage}
+          alt=""
+          fetchPriority="high"
+          position={{ base: 'absolute', md: 'fixed' }}
+          top="0"
+          left="0"
+          width="100%"
+          height="100%"
+          objectFit="cover"
+          objectPosition="center bottom"
+          zIndex="0"
+        />
+      )}
+
       {/* Dark overlay for readability */}
       {hasBackground && (
         <Box
@@ -32,6 +44,7 @@ export function Intro({ title, subtitle, children, backgroundImage }) {
           right="0"
           bottom="0"
           background="blackAlpha.600"
+          zIndex="0"
         />
       )}
 

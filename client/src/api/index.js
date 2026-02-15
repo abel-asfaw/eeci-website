@@ -4,6 +4,12 @@
 
 import contentfulClient from '../clients';
 
+function optimizeContentfulImage(url) {
+  if (!url) return url;
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}fm=webp&q=75`;
+}
+
 export async function fetchSiteSettings() {
   const response = await contentfulClient.getEntries({
     content_type: 'siteSettings',
@@ -39,8 +45,11 @@ export async function fetchSiteSettings() {
     ourVisionJson: siteSettings.ourVisionJson,
     ourValues: siteSettings.ourValues,
     teachingsJson: siteSettings.teachingsJson,
-    teamMembersJson: siteSettings.teamMembersJson,
-    backgroundImage: backgroundImageUrl,
+    teamMembersJson: siteSettings.teamMembersJson?.map((member) => ({
+      ...member,
+      photo: optimizeContentfulImage(member.photo),
+    })),
+    backgroundImage: optimizeContentfulImage(backgroundImageUrl),
   };
 }
 
@@ -69,7 +78,7 @@ export async function fetchServiceCarousels() {
         title: card.fields.title,
         subtitle: card.fields.subtitle,
         description: card.fields.description,
-        backgroundImage: card.fields.backgroundImage?.fields?.file?.url,
+        backgroundImage: optimizeContentfulImage(card.fields.backgroundImage?.fields?.file?.url),
       })) ?? [],
   }));
 }
@@ -128,7 +137,7 @@ export async function fetchVisitSettings() {
   return {
     directionsLink: visitSettings.directionsLink,
     locationTimesText: visitSettings.locationTimesText,
-    churchImage: churchImageUrl,
-    backgroundImage: backgroundImageUrl,
+    churchImage: optimizeContentfulImage(churchImageUrl),
+    backgroundImage: optimizeContentfulImage(backgroundImageUrl),
   };
 }

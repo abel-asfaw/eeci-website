@@ -44,8 +44,8 @@ function TeamCard({ name, role, photo }) {
           as="img"
           src={photo}
           alt={name}
-          w="100%"
-          h="100%"
+          width="400"
+          height="400"
           objectFit="cover"
         />
       ) : (
