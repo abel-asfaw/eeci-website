@@ -4,10 +4,13 @@
 
 import contentfulClient from '../clients';
 
-function optimizeContentfulImage(url, quality) {
+function optimizeContentfulImage(url, { quality, width, height } = {}) {
   if (!url) return url;
+  const params = [`fm=webp`, `q=${quality ?? 75}`];
+  if (width) params.push(`w=${width}`);
+  if (height) params.push(`h=${height}`);
   const separator = url.includes('?') ? '&' : '?';
-  return `${url}${separator}fm=webp&q=${quality ?? 75}`;
+  return `${url}${separator}${params.join('&')}`;
 }
 
 export async function fetchSiteSettings() {
@@ -51,7 +54,7 @@ export async function fetchSiteSettings() {
       photo: optimizeContentfulImage(member.photo),
     })),
     backgroundImage: optimizeContentfulImage(backgroundImageUrl),
-    logoImage: optimizeContentfulImage(logoImageUrl, 50),
+    logoImage: optimizeContentfulImage(logoImageUrl, { quality: 50, width: 120, height: 120 }),
   };
 }
 
