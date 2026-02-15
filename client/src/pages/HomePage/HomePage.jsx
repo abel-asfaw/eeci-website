@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import { Helmet } from 'react-helmet-async';
+
 import { Intro } from '../../components/Intro';
 import { Sermon } from '../../components/Sermon';
 import { About } from '../../components/About';
@@ -33,11 +33,9 @@ export function HomePage() {
   return (
     <Box as="main" id="main-content">
       <SEO {...PAGE_META.home} />
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(churchJsonLd)}
-        </script>
-      </Helmet>
+      <script type="application/ld+json">
+        {JSON.stringify(churchJsonLd)}
+      </script>
       <Intro
         title="Emmanuel Evangelical Church International"
         subtitle="You are so special and God LOVES you so much!"
