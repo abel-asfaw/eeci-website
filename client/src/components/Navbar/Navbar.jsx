@@ -1,12 +1,11 @@
-import { Box, Button, Flex, HStack, Image, Link } from '@chakra-ui/react';
+import { Box, Flex, HStack, Image, Link } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import eeciLogo from '../../assets/eeci-logo.PNG';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
 import { NAVIGATION_LINKS } from '../../constants';
 import { OutlineButton } from '../ui';
-import { useNavigate } from 'react-router-dom';
 
 export function Navbar() {
-  const navigate = useNavigate();
   const { data: siteSettings, isLoading, isError } = useSiteSettings();
 
   return (
@@ -26,13 +25,15 @@ export function Navbar() {
         justify="space-between"
         align="center"
       >
-        <Link onClick={() => navigate('/')}>
-          <Image alt="EECI" src={eeciLogo} height="60px" width="auto" />
+        <Link asChild>
+          <RouterLink to="/">
+            <Image alt="EECI" src={eeciLogo} height="60px" width="auto" />
+          </RouterLink>
         </Link>
         <HStack as="ul" listStyleType="none" gap="8">
           {NAVIGATION_LINKS.map(({ label, href }) => (
-            <Link key={label} onClick={() => navigate(href)}>
-              {label}
+            <Link key={label} asChild>
+              <RouterLink to={href}>{label}</RouterLink>
             </Link>
           ))}
           <OutlineButton

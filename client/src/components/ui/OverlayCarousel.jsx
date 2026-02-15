@@ -25,6 +25,7 @@ export function OverlayCarousel({ items }) {
 
   return (
     <Carousel.Root
+      aria-label="Content carousel"
       slideCount={items.length}
       width="full"
       height="full"
@@ -32,7 +33,7 @@ export function OverlayCarousel({ items }) {
     >
       <Carousel.Control gap="4" width="full" height="full" position="relative">
         <Carousel.PrevTrigger asChild>
-          <ActionButton insetStart="2">
+          <ActionButton aria-label="Previous slide" insetStart="2">
             <LuChevronLeft />
           </ActionButton>
         </Carousel.PrevTrigger>
@@ -79,7 +80,7 @@ export function OverlayCarousel({ items }) {
         </Carousel.ItemGroup>
 
         <Carousel.NextTrigger asChild>
-          <ActionButton insetEnd="2">
+          <ActionButton aria-label="Next slide" insetEnd="2">
             <LuChevronRight />
           </ActionButton>
         </Carousel.NextTrigger>

@@ -103,6 +103,7 @@ function TeamCarousel({ teamMembers }) {
 
   return (
     <Carousel.Root
+      aria-label="Team members carousel"
       slideCount={teamMembers.length}
       slidesPerPage={slidesPerPage}
       slidesPerMove={1}
@@ -113,6 +114,7 @@ function TeamCarousel({ teamMembers }) {
         <HStack>
           <Carousel.PrevTrigger asChild>
             <IconButton
+              aria-label="Previous team member"
               size="sm"
               variant="outline"
               rounded="full"
@@ -124,6 +126,7 @@ function TeamCarousel({ teamMembers }) {
           </Carousel.PrevTrigger>
           <Carousel.NextTrigger asChild>
             <IconButton
+              aria-label="Next team member"
               size="sm"
               variant="outline"
               rounded="full"

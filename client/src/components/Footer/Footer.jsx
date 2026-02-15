@@ -1,12 +1,11 @@
 import { Box, HStack, Link, Text } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import { FaFacebook, FaYoutube, FaTiktok, FaInstagram } from 'react-icons/fa6';
 import { SocialIconButton } from '../ui';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
 import { NAVIGATION_LINKS, CHURCH_INFO, ERROR_MESSAGES } from '../../constants';
-import { useNavigate } from 'react-router-dom';
 
 export function Footer() {
-  const navigate = useNavigate();
   const { data: siteSettings, isLoading, isError } = useSiteSettings();
 
   const socialLinks = [
@@ -40,8 +39,8 @@ export function Footer() {
           </HStack>
           <HStack justify="center" gap="8" marginY="10">
             {NAVIGATION_LINKS.map(({ label, href }) => (
-              <Link key={label} onClick={() => navigate(href)}>
-                {label}
+              <Link key={label} asChild>
+                <RouterLink to={href}>{label}</RouterLink>
               </Link>
             ))}
             <Link

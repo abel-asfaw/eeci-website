@@ -14,12 +14,13 @@ export function Map({ bg }) {
           boxShadow="lg"
         >
           <iframe
+            title="EECI Church Location Map"
             src={`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJwx59oqERyIkRetj8wDmxHaQ&key=
               ${mapKey}`}
-            width="600" 
-            height="450" 
-            loading="lazy" 
-            allowFullScreen 
+            width="600"
+            height="450"
+            loading="lazy"
+            allowFullScreen
             />
         </AspectRatio>
     </Section>

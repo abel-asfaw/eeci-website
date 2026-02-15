@@ -5,10 +5,13 @@ import { CoreValues } from '../../components/CoreValues';
 import { WhatWeTeach } from '../../components/WhatWeTeach';
 import { WhatWeBelieve } from '../../components/WhatWeBelieve';
 import { MeetOurTeam } from '../../components/MeetOurTeam';
+import { SEO } from '../../components/SEO';
+import { PAGE_META } from '../../constants/seo';
 
 export function AboutPage() {
   return (
-    <Box>
+    <Box as="main" id="main-content">
+      <SEO {...PAGE_META.about} />
       <Intro
         title="About Us"
         subtitle="Learn more about our vision, our values, and what we teach."

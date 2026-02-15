@@ -9,7 +9,7 @@ export function ContentCarousel({ items }) {
 
   return (
     <VStack gap="8" maxWidth="xl" marginX="auto">
-      <Carousel.Root slideCount={items.length} maxWidth="2xl" width="100%">
+      <Carousel.Root aria-label="Content carousel" slideCount={items.length} maxWidth="2xl" width="100%">
         <Carousel.ItemGroup overflow="overlay">
           {items.map((item, index) => (
             <Carousel.Item key={index} index={index} backgroundColor="white">
@@ -46,7 +46,7 @@ export function ContentCarousel({ items }) {
             backgroundColor="bg.primary"
             borderWidth="1.5px"
           >
-            <IconButton size="sm" variant="outline">
+            <IconButton aria-label="Previous slide" size="sm" variant="outline">
               <LuChevronLeft />
             </IconButton>
           </Carousel.PrevTrigger>
@@ -64,7 +64,7 @@ export function ContentCarousel({ items }) {
             backgroundColor="bg.primary"
             borderWidth="1.5px"
           >
-            <IconButton size="sm" variant="outline">
+            <IconButton aria-label="Next slide" size="sm" variant="outline">
               <LuChevronRight />
             </IconButton>
           </Carousel.NextTrigger>
