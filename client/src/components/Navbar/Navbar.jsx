@@ -1,6 +1,5 @@
 import { Box, Flex, HStack, Image, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import eeciLogo from '../../assets/eeci-logo.PNG';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
 import { NAVIGATION_LINKS } from '../../constants';
 import { OutlineButton } from '../ui';
@@ -27,7 +26,7 @@ export function Navbar() {
       >
         <Link asChild>
           <RouterLink to="/">
-            <Image alt="EECI" src={eeciLogo} height="60px" width="60px" />
+            <Image alt="EECI" src={siteSettings?.logoImage} height="60px" width="60px" />
           </RouterLink>
         </Link>
         <HStack as="ul" listStyleType="none" gap="8">

@@ -29,6 +29,7 @@ export async function fetchSiteSettings() {
 
   // Contentful media assets have nested structure: asset.fields.file.url
   const backgroundImageUrl = siteSettings.backgroundImage?.fields?.file?.url;
+  const logoImageUrl = siteSettings.logoImage?.fields?.file?.url;
 
   return {
     giveLink: siteSettings.giveLink,
@@ -50,6 +51,7 @@ export async function fetchSiteSettings() {
       photo: optimizeContentfulImage(member.photo),
     })),
     backgroundImage: optimizeContentfulImage(backgroundImageUrl),
+    logoImage: optimizeContentfulImage(logoImageUrl),
   };
 }
 
@@ -78,7 +80,9 @@ export async function fetchServiceCarousels() {
         title: card.fields.title,
         subtitle: card.fields.subtitle,
         description: card.fields.description,
-        backgroundImage: optimizeContentfulImage(card.fields.backgroundImage?.fields?.file?.url),
+        backgroundImage: optimizeContentfulImage(
+          card.fields.backgroundImage?.fields?.file?.url,
+        ),
       })) ?? [],
   }));
 }
