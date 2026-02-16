@@ -2,7 +2,7 @@ import { Box, Flex, HStack, Image, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
 import { NAVIGATION_LINKS } from '../../constants';
-import { OutlineButton } from '../ui';
+import { OutlineButton, ExternalLink } from '../ui';
 
 export function Navbar() {
   const { data: siteSettings, isLoading, isError } = useSiteSettings();
@@ -44,19 +44,9 @@ export function Navbar() {
               asChild
               disabled={isLoading || isError}
             >
-              <Link
-                href={siteSettings?.giveLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-disabled={isError ? '' : undefined}
-                onClick={(e) => {
-                  if (isError) {
-                    e.preventDefault();
-                  }
-                }}
-              >
+              <ExternalLink href={siteSettings?.giveLink} disabled={isError}>
                 Give
-              </Link>
+              </ExternalLink>
             </OutlineButton>
           </Box>
         </HStack>

@@ -34,7 +34,9 @@ export function Section({
   // Loading/error state props
   isLoading = false,
   isError = false,
+  errorMessage,
   skeletonHeight = '60px',
+  skeletonProps,
   justifyContent = 'center',
   // Content
   children,
@@ -88,10 +90,14 @@ export function Section({
 
         {isError ? (
           <Text color="error" fontStyle="italic">
-            {ERROR_MESSAGES.generic}
+            {errorMessage || ERROR_MESSAGES.generic}
           </Text>
         ) : isLoading ? (
-          <Skeleton height={skeletonHeight} borderRadius="md" />
+          <Skeleton
+            height={skeletonHeight}
+            borderRadius="md"
+            {...skeletonProps}
+          />
         ) : (
           children
         )}

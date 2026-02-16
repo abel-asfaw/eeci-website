@@ -42,4 +42,5 @@ export const ERROR_MESSAGES = {
   socialLinks: 'Unable to load social links.',
   sermon: 'Unable to load latest sermon. Please try again later.',
   values: 'Unable to load values. Please try again later.',
+  verse: 'Unable to load verse of the day. Please try again later.',
 };

@@ -4,13 +4,11 @@ import {
   Flex,
   HStack,
   Heading,
-  IconButton,
   Text,
   VStack,
   useBreakpointValue,
 } from '@chakra-ui/react';
-import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
-import { Section } from '../ui';
+import { Section, CarouselNavButton } from '../ui';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
 
 function getInitials(name) {
@@ -113,28 +111,10 @@ function TeamCarousel({ teamMembers }) {
       <HStack justify="flex-end" marginBottom="4">
         <HStack>
           <Carousel.PrevTrigger asChild>
-            <IconButton
-              aria-label="Previous team member"
-              size="sm"
-              variant="outline"
-              rounded="full"
-              backgroundColor="bg.primary"
-              borderWidth="1.5px"
-            >
-              <LuChevronLeft />
-            </IconButton>
+            <CarouselNavButton direction="prev" rounded="full" />
           </Carousel.PrevTrigger>
           <Carousel.NextTrigger asChild>
-            <IconButton
-              aria-label="Next team member"
-              size="sm"
-              variant="outline"
-              rounded="full"
-              backgroundColor="bg.primary"
-              borderWidth="1.5px"
-            >
-              <LuChevronRight />
-            </IconButton>
+            <CarouselNavButton direction="next" rounded="full" />
           </Carousel.NextTrigger>
         </HStack>
       </HStack>

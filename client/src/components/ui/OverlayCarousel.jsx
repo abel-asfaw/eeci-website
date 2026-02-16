@@ -1,22 +1,6 @@
 import { Box, Heading, VStack, Text } from '@chakra-ui/react';
-import { Carousel, IconButton } from '@chakra-ui/react';
-import { forwardRef } from 'react';
-import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
-
-const ActionButton = forwardRef(function ActionButton(props, ref) {
-  return (
-    <IconButton
-      {...props}
-      ref={ref}
-      size="xs"
-      variant="outline"
-      rounded="full"
-      position="absolute"
-      zIndex="1"
-      backgroundColor="bg"
-    />
-  );
-});
+import { Carousel } from '@chakra-ui/react';
+import { CarouselNavButton } from './CarouselNavButton';
 
 export function OverlayCarousel({ items }) {
   if (!items || items.length === 0) {
@@ -33,9 +17,16 @@ export function OverlayCarousel({ items }) {
     >
       <Carousel.Control gap="4" width="full" height="full" position="relative">
         <Carousel.PrevTrigger asChild>
-          <ActionButton aria-label="Previous slide" insetStart="2">
-            <LuChevronLeft />
-          </ActionButton>
+          <CarouselNavButton
+            direction="prev"
+            size="xs"
+            rounded="full"
+            position="absolute"
+            zIndex="1"
+            backgroundColor="bg"
+            borderWidth="0"
+            insetStart="2"
+          />
         </Carousel.PrevTrigger>
 
         <Carousel.ItemGroup width="full" height="full" overflow="overlay">
@@ -80,9 +71,16 @@ export function OverlayCarousel({ items }) {
         </Carousel.ItemGroup>
 
         <Carousel.NextTrigger asChild>
-          <ActionButton aria-label="Next slide" insetEnd="2">
-            <LuChevronRight />
-          </ActionButton>
+          <CarouselNavButton
+            direction="next"
+            size="xs"
+            rounded="full"
+            position="absolute"
+            zIndex="1"
+            backgroundColor="bg"
+            borderWidth="0"
+            insetEnd="2"
+          />
         </Carousel.NextTrigger>
       </Carousel.Control>
     </Carousel.Root>

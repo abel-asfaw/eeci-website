@@ -1,6 +1,6 @@
 import { Box, VStack, Heading, Text } from '@chakra-ui/react';
-import { Carousel, IconButton } from '@chakra-ui/react';
-import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
+import { Carousel } from '@chakra-ui/react';
+import { CarouselNavButton } from './CarouselNavButton';
 
 export function ContentCarousel({ items }) {
   if (!items || items.length === 0) {
@@ -41,14 +41,8 @@ export function ContentCarousel({ items }) {
         </Carousel.ItemGroup>
 
         <Carousel.Control justifyContent="center" gap="4" marginTop="6">
-          <Carousel.PrevTrigger
-            asChild
-            backgroundColor="bg.primary"
-            borderWidth="1.5px"
-          >
-            <IconButton aria-label="Previous slide" size="sm" variant="outline">
-              <LuChevronLeft />
-            </IconButton>
+          <Carousel.PrevTrigger asChild>
+            <CarouselNavButton direction="prev" />
           </Carousel.PrevTrigger>
 
           <Carousel.Indicators
@@ -59,14 +53,8 @@ export function ContentCarousel({ items }) {
             }}
           />
 
-          <Carousel.NextTrigger
-            asChild
-            backgroundColor="bg.primary"
-            borderWidth="1.5px"
-          >
-            <IconButton aria-label="Next slide" size="sm" variant="outline">
-              <LuChevronRight />
-            </IconButton>
+          <Carousel.NextTrigger asChild>
+            <CarouselNavButton direction="next" />
           </Carousel.NextTrigger>
         </Carousel.Control>
       </Carousel.Root>
