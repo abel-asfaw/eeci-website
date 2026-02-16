@@ -19,8 +19,6 @@ function getInitials(name) {
 }
 
 function TeamCard({ name, role, photo }) {
-  const hasPhoto = !!photo;
-
   return (
     <Box
       position="relative"
@@ -31,13 +29,15 @@ function TeamCard({ name, role, photo }) {
       overflow="hidden"
       flexShrink={0}
       css={{
-        '&:hover .overlay': {
-          opacity: 1,
+        '@media (hover: hover)': {
+          '&:hover .overlay': {
+            opacity: 1,
+          },
         },
       }}
     >
       {/* Photo or Initials */}
-      {hasPhoto ? (
+      {photo ? (
         <Box
           as="img"
           src={photo}
@@ -78,7 +78,7 @@ function TeamCard({ name, role, photo }) {
         right="0"
         height="100%"
         background="linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 40%, transparent 100%)"
-        opacity="0"
+        opacity={{ base: 1, md: 0 }}
         transition="opacity 300ms ease"
         align="flex-end"
         p="6"
@@ -108,7 +108,12 @@ function TeamCarousel({ teamMembers }) {
       spacing="24px"
       allowMouseDrag
     >
-      <HStack justify="flex-end" marginBottom="4">
+      {/* Desktop: top-right buttons */}
+      <HStack
+        justify="flex-end"
+        marginBottom="4"
+        display={{ base: 'none', md: 'flex' }}
+      >
         <HStack>
           <Carousel.PrevTrigger asChild>
             <CarouselNavButton direction="prev" rounded="full" />
@@ -130,6 +135,30 @@ function TeamCarousel({ teamMembers }) {
           </Carousel.Item>
         ))}
       </Carousel.ItemGroup>
+
+      {/* Mobile: bottom centered buttons with indicators */}
+      <Carousel.Control
+        justifyContent="center"
+        gap="4"
+        marginTop="6"
+        display={{ base: 'flex', md: 'none' }}
+      >
+        <Carousel.PrevTrigger asChild>
+          <CarouselNavButton direction="prev" />
+        </Carousel.PrevTrigger>
+
+        <Carousel.Indicators
+          borderWidth="1px"
+          borderColor="border.emphasized"
+          _current={{
+            borderWidth: 0,
+          }}
+        />
+
+        <Carousel.NextTrigger asChild>
+          <CarouselNavButton direction="next" />
+        </Carousel.NextTrigger>
+      </Carousel.Control>
     </Carousel.Root>
   );
 }
