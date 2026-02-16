@@ -93,34 +93,6 @@ export async function fetchServiceCarousels() {
   }));
 }
 
-/**
- * Bible Gateway VOTD (Verse of the Day) API service
- */
-
-export async function fetchVerseOfTheDay(version = 'NASB') {
-  const bibleGatewayUrl = `https://www.biblegateway.com/votd/get/?format=json&version=${version}`;
-  // Use CORS proxy to bypass CORS restrictions
-  const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(bibleGatewayUrl)}`;
-
-  const response = await fetch(proxyUrl);
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch verse of the day: ${response.statusText}`);
-  }
-
-  const proxyData = await response.json();
-  const data = JSON.parse(proxyData.contents);
-
-  return {
-    text: data.votd.text,
-    content: data.votd.content,
-    reference: data.votd.reference,
-    displayReference: data.votd.display_ref,
-    permalink: data.votd.permalink,
-    version: data.votd.version,
-    date: data.votd.date,
-  };
-}
 
 export async function fetchVisitSettings() {
   const response = await contentfulClient.getEntries({
