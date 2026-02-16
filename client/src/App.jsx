@@ -7,10 +7,10 @@ import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
 
 const AboutPage = lazy(() =>
-  import('./pages/AboutPage').then((m) => ({ default: m.AboutPage }))
+  import('./pages/AboutPage').then((m) => ({ default: m.AboutPage })),
 );
 const VisitPage = lazy(() =>
-  import('./pages/VisitPage').then((m) => ({ default: m.VisitPage }))
+  import('./pages/VisitPage').then((m) => ({ default: m.VisitPage })),
 );
 
 function App() {
@@ -34,7 +34,12 @@ function App() {
       <Navbar />
       <Suspense
         fallback={
-          <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="50vh"
+          >
             <Spinner size="xl" />
           </Box>
         }

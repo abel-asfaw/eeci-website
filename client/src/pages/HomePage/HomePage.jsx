@@ -33,9 +33,7 @@ export function HomePage() {
   return (
     <Box as="main" id="main-content">
       <SEO {...PAGE_META.home} />
-      <script type="application/ld+json">
-        {JSON.stringify(churchJsonLd)}
-      </script>
+      <script type="application/ld+json">{JSON.stringify(churchJsonLd)}</script>
       <Intro
         title="Emmanuel Evangelical Church International"
         subtitle="You are so special and God LOVES you so much!"

@@ -26,7 +26,12 @@ export function Navbar() {
       >
         <Link asChild>
           <RouterLink to="/">
-            <Image alt="EECI" src={siteSettings?.logoImage} height="60px" width="60px" />
+            <Image
+              alt="EECI"
+              src={siteSettings?.logoImage}
+              height="60px"
+              width="60px"
+            />
           </RouterLink>
         </Link>
         <HStack as="ul" listStyleType="none" gap="8">

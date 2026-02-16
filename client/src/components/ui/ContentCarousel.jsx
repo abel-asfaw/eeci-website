@@ -9,7 +9,12 @@ export function ContentCarousel({ items }) {
 
   return (
     <VStack gap="8" maxWidth="xl" marginX="auto">
-      <Carousel.Root aria-label="Content carousel" slideCount={items.length} maxWidth="2xl" width="100%">
+      <Carousel.Root
+        aria-label="Content carousel"
+        slideCount={items.length}
+        maxWidth="2xl"
+        width="100%"
+      >
         <Carousel.ItemGroup overflow="overlay">
           {items.map((item, index) => (
             <Carousel.Item key={index} index={index} backgroundColor="white">
