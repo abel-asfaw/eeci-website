@@ -93,7 +93,6 @@ export async function fetchServiceCarousels() {
   }));
 }
 
-
 export async function fetchVisitSettings() {
   const response = await contentfulClient.getEntries({
     content_type: 'visitSettings',
@@ -118,6 +117,7 @@ export async function fetchVisitSettings() {
 
   return {
     directionsLink: visitSettings.directionsLink,
+    directionsEmbedLink: visitSettings.directionsEmbedLink,
     locationTimesText: visitSettings.locationTimesText,
     churchImage: optimizeContentfulImage(churchImageUrl),
     backgroundImage: optimizeContentfulImage(backgroundImageUrl),

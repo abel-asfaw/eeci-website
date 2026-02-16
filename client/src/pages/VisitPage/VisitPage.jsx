@@ -17,10 +17,8 @@ export function VisitPage() {
         subtitle="We're so excited to meet you!"
         backgroundImage={visitSettings?.backgroundImage}
       />
-      <Location 
-        title="Location & Times"
-        bg="bg.primary" />
-      <Map bg="bg.secondary" />
+      <Location title="Location & Times" bg="bg.primary" />
+      <Map bg="bg.secondary" embedLink={visitSettings?.directionsEmbedLink} />
     </Box>
   );
 }
