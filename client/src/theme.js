@@ -5,7 +5,8 @@ const config = defineConfig({
     'html, body': {
       margin: 0,
       padding: 0,
-      fontFamily: 'system-ui, -apple-system, sans-serif',
+      fontSize: '18px',
+      fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
     },
   },
   theme: {
