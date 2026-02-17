@@ -6,11 +6,14 @@ const config = defineConfig({
       margin: 0,
       padding: 0,
       fontSize: '18px',
-      fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
     },
   },
   theme: {
     tokens: {
+      fonts: {
+        heading: { value: "'Outfit', system-ui, -apple-system, sans-serif" },
+        body: { value: "'Outfit', system-ui, -apple-system, sans-serif" },
+      },
       colors: {
         brand: {
           50: { value: '#f9f9f9' },
