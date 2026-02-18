@@ -5,6 +5,7 @@ import { HomePage } from './pages/HomePage';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
+import { usePageTracking } from './hooks/usePageTracking';
 
 const AboutPage = lazy(() =>
   import('./pages/AboutPage').then((m) => ({ default: m.AboutPage })),
@@ -16,6 +17,16 @@ const VisitPage = lazy(() =>
 function App() {
   return (
     <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  );
+}
+
+function AppContent() {
+  usePageTracking();
+
+  return (
+    <>
       <ScrollToTop />
       <Box
         as="a"
@@ -51,7 +62,7 @@ function App() {
         </Routes>
       </Suspense>
       <Footer />
-    </BrowserRouter>
+    </>
   );
 }
 
