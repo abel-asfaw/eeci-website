@@ -36,6 +36,7 @@ export function HomePage() {
       <script type="application/ld+json">{JSON.stringify(churchJsonLd)}</script>
       <Intro
         title="Emmanuel Evangelical Church International"
+        titleSize="3.5rem"
         subtitle="You are so special and God LOVES you so much!"
         backgroundImage={siteSettings?.backgroundImage}
       >
