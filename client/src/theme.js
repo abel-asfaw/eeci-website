@@ -10,12 +10,6 @@ const config = defineConfig({
   },
   theme: {
     tokens: {
-      fonts: {
-        heading: {
-          value: "'source-serif', system-ui, -apple-system, sans-serif",
-        },
-        body: { value: "'source-serif', system-ui, -apple-system, sans-serif" },
-      },
       colors: {
         brand: {
           50: { value: '#f9f9f9' },
