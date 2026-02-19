@@ -1,6 +1,12 @@
 import { Box, Container, Heading, Image, Text } from '@chakra-ui/react';
 
-export function Intro({ title, subtitle, children, backgroundImage }) {
+export function Intro({ 
+  title,
+  titleSize = '2.5rem',
+  subtitle, 
+  children, 
+  backgroundImage 
+}) {
   const hasBackground = !!backgroundImage;
 
   return (
@@ -51,7 +57,7 @@ export function Intro({ title, subtitle, children, backgroundImage }) {
       <Container maxWidth="800px" position="relative" zIndex="1">
         <Heading
           as="h1"
-          fontSize={{ base: '2rem', md: '2.5rem' }}
+          fontSize={{ base: '2rem', md: titleSize }}
           fontWeight="700"
           lineHeight="normal"
           color={hasBackground ? 'white' : 'text.primary'}
