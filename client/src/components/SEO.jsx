@@ -1,12 +1,13 @@
 import { SEO_DEFAULTS } from '../constants/seo';
 
-export function SEO({ title, description, path }) {
+export function SEO({ title, description, keywords, path }) {
   const url = `${SEO_DEFAULTS.siteUrl}${path}`;
 
   return (
     <>
       <title>{title}</title>
       <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
       <link rel="canonical" href={url} />
 
       {/* Open Graph */}
