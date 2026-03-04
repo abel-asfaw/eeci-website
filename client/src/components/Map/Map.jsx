@@ -9,6 +9,7 @@ export function Map({ bg, embedLink }) {
         borderRadius="lg"
         overflow="hidden"
         boxShadow="lg"
+        mx={{ base: '-6', md: '0' }}
       >
         <iframe
           src={embedLink}
