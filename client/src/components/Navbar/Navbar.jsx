@@ -34,7 +34,7 @@ export function Navbar() {
             />
           </RouterLink>
         </Link>
-        <HStack as="ul" listStyleType="none" gap="8">
+        <HStack as="ul" listStyleType="none" gap="4">
           {NAVIGATION_LINKS.map(({ label, href }) => (
             <Box as="li" key={label}>
               <Link asChild>
