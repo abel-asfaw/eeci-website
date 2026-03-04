@@ -1,3 +1,13 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*:not(dialog) {
+  margin: 0;
+}
+
 @font-face {
   font-family: 'source-serif';
   src: url('./assets/fonts/SourceSerif4.ttf') format('truetype');

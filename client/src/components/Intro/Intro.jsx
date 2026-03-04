@@ -1,11 +1,11 @@
 import { Box, Container, Heading, Image, Text } from '@chakra-ui/react';
 
-export function Intro({ 
+export function Intro({
   title,
   titleSize = '2.5rem',
-  subtitle, 
-  children, 
-  backgroundImage 
+  subtitle,
+  children,
+  backgroundImage,
 }) {
   const hasBackground = !!backgroundImage;
 
@@ -14,6 +14,7 @@ export function Intro({
       as="section"
       position="relative"
       display="flex"
+      justifyContent="center"
       alignItems="center"
       textAlign="center"
       paddingY={{ base: '20', md: '32' }}

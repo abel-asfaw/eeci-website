@@ -43,8 +43,8 @@ export function Section({
       background={bg}
       textAlign={textAlign}
       paddingY={paddingY}
-      paddingX={paddingX}
-      justifyContent={justifyContent}
+      paddingX={{ base: 0, md: paddingX }}
+      justifyItems={justifyContent}
     >
       <Container maxWidth={maxWidth}>
         {title && (
