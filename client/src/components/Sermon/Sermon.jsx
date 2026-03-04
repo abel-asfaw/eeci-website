@@ -20,6 +20,7 @@ export function Sermon({ bg }) {
         borderRadius="lg"
         overflow="hidden"
         boxShadow="lg"
+        mx={{ base: '-6', md: '0' }}
       >
         <iframe
           src={siteSettings?.sermonsPlaylist}
