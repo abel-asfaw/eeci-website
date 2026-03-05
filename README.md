@@ -63,6 +63,5 @@ The current website feels outdated, has inconsistencies in design, and lacks cla
 - Nathan
 - Joshua
 - Alazar
-- Naomie
 
 ## 🙏 Let’s build something beautiful for His glory.
