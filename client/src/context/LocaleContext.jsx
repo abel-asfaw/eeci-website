@@ -7,7 +7,7 @@ const ENGLISH = 'en-US';
 
 function getInitialLocale() {
   const stored = localStorage.getItem(LOCALE_KEY);
-  return stored === ENGLISH ? ENGLISH : AMHARIC;
+  return stored === AMHARIC ? AMHARIC : ENGLISH;
 }
 
 export function LocaleProvider({ children }) {
