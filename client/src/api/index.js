@@ -45,9 +45,9 @@ export async function fetchSiteSettings(locale) {
     missionTagline: siteSettings.missionTagline,
     valuesJson: siteSettings.valuesJson,
     historyText: siteSettings.historyText,
-    ourVisionJson: siteSettings.ourVisionJson,
+    visionStatement: siteSettings.visionStatement,
     ourValues: siteSettings.ourValues,
-    teachingsJson: siteSettings.teachingsJson,
+    teachingStatement: siteSettings.teachingStatement,
     teamMembersJson: siteSettings.teamMembersJson?.map((member) => ({
       ...member,
       photo: optimizeContentfulImage(member.photo),
@@ -118,6 +118,56 @@ export async function fetchTeamCarousel(locale) {
       photo: optimizeContentfulImage(
         card.fields.backgroundImage?.fields?.file?.url,
       ),
+    })) ?? []
+  );
+}
+
+export async function fetchVisionCarousel(locale) {
+  const response = await contentfulClient.getEntries({
+    content_type: 'carousel',
+    'fields.type': 'our-vision',
+    locale,
+  });
+
+  if (!response) {
+    throw new Error('Failed to fetch vision carousel');
+  }
+
+  if (response.items.length === 0) {
+    console.warn('[Contentful] No vision carousel entry found');
+    return [];
+  }
+
+  const carousel = response.items[0];
+  return (
+    carousel.fields.cards?.map((card) => ({
+      title: card.fields.title,
+      description: card.fields.description,
+    })) ?? []
+  );
+}
+
+export async function fetchTeachingsCarousel(locale) {
+  const response = await contentfulClient.getEntries({
+    content_type: 'carousel',
+    'fields.type': 'teachings',
+    locale,
+  });
+
+  if (!response) {
+    throw new Error('Failed to fetch teachings carousel');
+  }
+
+  if (response.items.length === 0) {
+    console.warn('[Contentful] No teachings carousel entry found');
+    return [];
+  }
+
+  const carousel = response.items[0];
+  return (
+    carousel.fields.cards?.map((card) => ({
+      title: card.fields.title,
+      description: card.fields.description,
     })) ?? []
   );
 }
