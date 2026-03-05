@@ -1,12 +1,14 @@
-import { Box, HStack, Link, Text } from '@chakra-ui/react';
+import { Box, Button, HStack, Link, Text } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { SocialIconButton } from '../ui';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
+import { useLocale } from '../../hooks/useLocale';
 import { NAVIGATION_LINKS, CHURCH_INFO, ERROR_MESSAGES } from '../../constants';
 import { buildSocialLinks } from '../../constants/socialLinks';
 
 export function Footer() {
   const { data: siteSettings, isLoading, isError } = useSiteSettings();
+  const { locale, toggleLocale } = useLocale();
 
   const socialLinks = buildSocialLinks(siteSettings);
 
@@ -49,6 +51,14 @@ export function Footer() {
               Give
             </Link>
           </HStack>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={toggleLocale}
+            aria-label="Toggle language"
+          >
+            {locale === 'de-DE' ? '🇺🇸 EN' : '🇪🇹 አማ'}
+          </Button>
         </>
       )}
       <Text color="text.secondary" fontSize="sm">
