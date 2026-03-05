@@ -9,7 +9,7 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react';
 import { Section, CarouselNavButton } from '../ui';
-import { useSiteSettings } from '../../hooks/useSiteSettings';
+import { useTeamCarousel } from '../../hooks/useTeamCarousel';
 
 function getInitials(name) {
   if (!name) return '?';
@@ -164,8 +164,7 @@ function TeamCarousel({ teamMembers }) {
 }
 
 export function MeetOurTeam({ bg }) {
-  const { data: siteSettings, isLoading, isError } = useSiteSettings();
-  const teamMembers = siteSettings?.teamMembersJson || [];
+  const { data: teamMembers = [], isLoading, isError } = useTeamCarousel();
 
   return (
     <Section

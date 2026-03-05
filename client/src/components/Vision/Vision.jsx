@@ -1,10 +1,11 @@
 import { Section, ContentCarousel } from '../ui';
 import { useSiteSettings } from '../../hooks/useSiteSettings';
+import { useVisionCarousel } from '../../hooks/useVisionCarousel';
 import { Text } from '@chakra-ui/react';
 
 export function Vision({ bg }) {
-  const { data: siteSettings, isLoading, isError } = useSiteSettings();
-  const ourVisionJson = siteSettings?.ourVisionJson || [];
+  const { data: siteSettings } = useSiteSettings();
+  const { data: visionPoints = [], isLoading, isError } = useVisionCarousel();
 
   return (
     <Section
@@ -21,18 +22,10 @@ export function Vision({ bg }) {
         lineHeight="1.8"
         marginBottom="6"
       >
-        {ourVisionJson?.visionStatement}
+        {siteSettings?.visionStatement}
       </Text>
 
-      <Text
-        fontSize="md"
-        fontWeight="600"
-        color="text.primary"
-        marginBottom="4"
-      >
-        {ourVisionJson?.visionSegway}
-      </Text>
-      <ContentCarousel items={ourVisionJson?.visionPoints} />
+      <ContentCarousel items={visionPoints} />
     </Section>
   );
 }

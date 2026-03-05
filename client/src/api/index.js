@@ -13,10 +13,10 @@ function optimizeContentfulImage(url, { quality, width, height } = {}) {
   return `${url}${separator}${params.join('&')}`;
 }
 
-export async function fetchSiteSettings() {
+export async function fetchSiteSettings(locale) {
   const response = await contentfulClient.getEntries({
     content_type: 'siteSettings',
-    limit: 1,
+    locale,
   });
 
   if (!response) {
@@ -29,7 +29,6 @@ export async function fetchSiteSettings() {
   }
 
   const siteSettings = response.items[0].fields;
-
   // Contentful media assets have nested structure: asset.fields.file.url
   const backgroundImageUrl = siteSettings.backgroundImage?.fields?.file?.url;
   const logoImageUrl = siteSettings.logoImage?.fields?.file?.url;
@@ -44,15 +43,10 @@ export async function fetchSiteSettings() {
     youtubeUrl: siteSettings.youtubeUrl,
     tiktokUrl: siteSettings.tiktokUrl,
     missionTagline: siteSettings.missionTagline,
-    valuesJson: siteSettings.valuesJson,
     historyText: siteSettings.historyText,
-    ourVisionJson: siteSettings.ourVisionJson,
+    visionStatement: siteSettings.visionStatement,
     ourValues: siteSettings.ourValues,
-    teachingsJson: siteSettings.teachingsJson,
-    teamMembersJson: siteSettings.teamMembersJson?.map((member) => ({
-      ...member,
-      photo: optimizeContentfulImage(member.photo),
-    })),
+    teachingStatement: siteSettings.teachingStatement,
     backgroundImage: optimizeContentfulImage(backgroundImageUrl),
     logoImage: optimizeContentfulImage(logoImageUrl, {
       width: 200,
@@ -61,10 +55,12 @@ export async function fetchSiteSettings() {
   };
 }
 
-export async function fetchServiceCarousels() {
+export async function fetchServiceCarousels(locale) {
   const response = await contentfulClient.getEntries({
-    content_type: 'serviceCarousel',
+    content_type: 'carousel',
+    'fields.type': 'services',
     order: 'fields.order',
+    locale,
   });
 
   if (!response) {
@@ -93,10 +89,89 @@ export async function fetchServiceCarousels() {
   }));
 }
 
-export async function fetchVisitSettings() {
+export async function fetchTeamCarousel(locale) {
+  const response = await contentfulClient.getEntries({
+    content_type: 'carousel',
+    'fields.type': 'team',
+    locale,
+  });
+
+  if (!response) {
+    throw new Error('Failed to fetch team carousel');
+  }
+
+  if (response.items.length === 0) {
+    console.warn('[Contentful] No team carousel entry found');
+    return [];
+  }
+
+  const carousel = response.items[0];
+  return (
+    carousel.fields.cards?.map((card) => ({
+      name: card.fields.title,
+      role: card.fields.subtitle,
+      photo: optimizeContentfulImage(
+        card.fields.backgroundImage?.fields?.file?.url,
+      ),
+    })) ?? []
+  );
+}
+
+export async function fetchVisionCarousel(locale) {
+  const response = await contentfulClient.getEntries({
+    content_type: 'carousel',
+    'fields.type': 'our-vision',
+    locale,
+  });
+
+  if (!response) {
+    throw new Error('Failed to fetch vision carousel');
+  }
+
+  if (response.items.length === 0) {
+    console.warn('[Contentful] No vision carousel entry found');
+    return [];
+  }
+
+  const carousel = response.items[0];
+  return (
+    carousel.fields.cards?.map((card) => ({
+      title: card.fields.title,
+      description: card.fields.description,
+    })) ?? []
+  );
+}
+
+export async function fetchTeachingsCarousel(locale) {
+  const response = await contentfulClient.getEntries({
+    content_type: 'carousel',
+    'fields.type': 'teachings',
+    locale,
+  });
+
+  if (!response) {
+    throw new Error('Failed to fetch teachings carousel');
+  }
+
+  if (response.items.length === 0) {
+    console.warn('[Contentful] No teachings carousel entry found');
+    return [];
+  }
+
+  const carousel = response.items[0];
+  return (
+    carousel.fields.cards?.map((card) => ({
+      title: card.fields.title,
+      description: card.fields.description,
+    })) ?? []
+  );
+}
+
+export async function fetchVisitSettings(locale) {
   const response = await contentfulClient.getEntries({
     content_type: 'visitSettings',
     limit: 1,
+    locale,
   });
 
   if (!response) {
