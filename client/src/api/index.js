@@ -43,15 +43,10 @@ export async function fetchSiteSettings(locale) {
     youtubeUrl: siteSettings.youtubeUrl,
     tiktokUrl: siteSettings.tiktokUrl,
     missionTagline: siteSettings.missionTagline,
-    valuesJson: siteSettings.valuesJson,
     historyText: siteSettings.historyText,
     visionStatement: siteSettings.visionStatement,
     ourValues: siteSettings.ourValues,
     teachingStatement: siteSettings.teachingStatement,
-    teamMembersJson: siteSettings.teamMembersJson?.map((member) => ({
-      ...member,
-      photo: optimizeContentfulImage(member.photo),
-    })),
     backgroundImage: optimizeContentfulImage(backgroundImageUrl),
     logoImage: optimizeContentfulImage(logoImageUrl, {
       width: 200,
