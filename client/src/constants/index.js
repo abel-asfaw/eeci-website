@@ -20,6 +20,7 @@ export const DEFAULT_SITE_SETTINGS = {
 export const NAVIGATION_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Visit', href: '/visit' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 /**

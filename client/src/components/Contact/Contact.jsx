@@ -3,8 +3,6 @@ import emailjs from '@emailjs/browser'
 import {
   Box,
   Button,
-  FormControl,
-  FormLabel,
   Grid,
   GridItem,
   Input,
@@ -27,7 +25,7 @@ export function Contact() {
     ).then(
       () => {
         alert("Message sent successfully!")
-        formRef.current.reset() // clears form
+        formRef.current.reset()
       },
       (error) => {
         console.error(error)
@@ -37,65 +35,64 @@ export function Contact() {
   }
 
   return (
-    <Box
-      maxW="900px"
-      mx="auto"
-      mt="16"
-      px="6"
-    >
-      <form ref={formRef} onSubmit={sendEmail}>
+    <Box maxW="900px" mx="auto" mt="16" px="6">
+ <form ref={formRef} onSubmit={sendEmail}>
 
-        {/* name fields */}
-        <FormControl isRequired mb="8">
-          <FormLabel fontSize="lg" fontWeight="600">
-            Name
-          </FormLabel>
+  {/* first + last name */}
+  <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap="6" mb="8">
 
-          <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap="6">
-            <GridItem>
-              <Input name="first_name" size="lg" />
-              <Text fontSize="sm" color="gray.500" mt="2">
-                First
-              </Text>
-            </GridItem>
+    <GridItem>
+      <Text fontSize="lg" fontWeight="600" mb="2">
+        First Name <Text as="span" color="red.500">*</Text>
+      </Text>
+      <Input name="first_name" size="lg" required />
+    </GridItem>
 
-            <GridItem>
-              <Input name="last_name" size="lg" />
-              <Text fontSize="sm" color="gray.500" mt="2">
-                Last
-              </Text>
-            </GridItem>
-          </Grid>
-        </FormControl>
+    <GridItem>
+      <Text fontSize="lg" fontWeight="600" mb="2">
+        Last Name <Text as="span" color="red.500">*</Text>
+      </Text>
+      <Input name="last_name" size="lg" required />
+    </GridItem>
 
-        {/* email */}
-        <FormControl isRequired mb="8">
-          <FormLabel fontSize="lg" fontWeight="600">
-            Email
-          </FormLabel>
-          <Input type="email" name="email" size="lg" />
-        </FormControl>
+  </Grid>
 
-        {/* message */}
-        <FormControl isRequired mb="10">
-          <FormLabel fontSize="lg" fontWeight="600">
-            Comment or Message
-          </FormLabel>
-          <Textarea name="message" rows="6" size="lg" resize="vertical" />
-        </FormControl>
+  {/* email */}
+  <Text fontSize="lg" fontWeight="600" mb="2">
+    Email <Text as="span" color="red.500">*</Text>
+  </Text>
+  <Input type="email" name="email" size="lg" mb="8" required />
 
-        {/* submit button */}
-        <Button
-          type="submit"
-          size="lg"
-          px="10"
-          bg="gray.300"
-          _hover={{ bg: 'gray.400' }}
-        >
-          Submit
-        </Button>
+  {/* message */}
+  <Text fontSize="lg" fontWeight="600" mb="2">
+    Comment or Message <Text as="span" color="red.500">*</Text>
+  </Text>
+  <Textarea name="message" rows="6" size="lg" mb="10" required />
 
-      </form>
+  {/* submit */}
+  <Button
+  type="submit"
+  size="lg"
+  px="12"
+  py="6"
+  fontWeight="600"
+  bg="gray.900"
+  color="white"
+  borderRadius="md"
+  transition="all 0.2s ease"
+  _hover={{
+    bg: "gray.700",              // lighter on hover
+    textDecoration: "underline",
+    textUnderlineOffset: "6px",
+  }}
+  _active={{
+    bg: "gray.800",
+  }}
+>
+  Submit
+</Button>
+
+</form>
     </Box>
   )
 }
