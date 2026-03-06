@@ -210,7 +210,7 @@ export async function fetchContactSettings() {
   }
 
   if (response.items.length === 0) {
-    console.warn('[Contentful] No contactSettings entries found, using defaults');
+    console.warn('[Contentful] No contactSettings entries found');
     return {};
   }
 
@@ -218,6 +218,7 @@ export async function fetchContactSettings() {
 
   return {
     contactPage: contactSettings.contactPage,
-    connectWithChurchMessage: contactSettings.connectWithChurchMessage,
+    connectWithChurchMessage:
+      contactSettings.connectWithChurchMessage,
   };
 }

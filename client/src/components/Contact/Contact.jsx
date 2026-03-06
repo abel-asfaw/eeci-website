@@ -1,9 +1,21 @@
 import { useRef } from 'react'
 import emailjs from '@emailjs/browser'
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Grid,
+  GridItem,
+  Input,
+  Textarea,
+  Text,
+} from '@chakra-ui/react'
 
 export function Contact() {
   const formRef = useRef()
 
+  // handles email submission
   const sendEmail = (e) => {
     e.preventDefault()
 
@@ -15,7 +27,7 @@ export function Contact() {
     ).then(
       () => {
         alert("Message sent successfully!")
-        formRef.current.reset()
+        formRef.current.reset() // clears form
       },
       (error) => {
         console.error(error)
@@ -25,18 +37,65 @@ export function Contact() {
   }
 
   return (
-    <section style={{ padding: "4rem 2rem" }}>
-      <h2>Contact Us</h2>
-
+    <Box
+      maxW="900px"
+      mx="auto"
+      mt="16"
+      px="6"
+    >
       <form ref={formRef} onSubmit={sendEmail}>
-        <input type="text" name="name" placeholder="Your Name" required />
-        <br /><br />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <br /><br />
-        <textarea name="message" placeholder="Your Message" required />
-        <br /><br />
-        <button type="submit">Send Message</button>
+
+        {/* name fields */}
+        <FormControl isRequired mb="8">
+          <FormLabel fontSize="lg" fontWeight="600">
+            Name
+          </FormLabel>
+
+          <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap="6">
+            <GridItem>
+              <Input name="first_name" size="lg" />
+              <Text fontSize="sm" color="gray.500" mt="2">
+                First
+              </Text>
+            </GridItem>
+
+            <GridItem>
+              <Input name="last_name" size="lg" />
+              <Text fontSize="sm" color="gray.500" mt="2">
+                Last
+              </Text>
+            </GridItem>
+          </Grid>
+        </FormControl>
+
+        {/* email */}
+        <FormControl isRequired mb="8">
+          <FormLabel fontSize="lg" fontWeight="600">
+            Email
+          </FormLabel>
+          <Input type="email" name="email" size="lg" />
+        </FormControl>
+
+        {/* message */}
+        <FormControl isRequired mb="10">
+          <FormLabel fontSize="lg" fontWeight="600">
+            Comment or Message
+          </FormLabel>
+          <Textarea name="message" rows="6" size="lg" resize="vertical" />
+        </FormControl>
+
+        {/* submit button */}
+        <Button
+          type="submit"
+          size="lg"
+          px="10"
+          bg="gray.300"
+          _hover={{ bg: 'gray.400' }}
+        >
+          Submit
+        </Button>
+
       </form>
-    </section>
+    </Box>
   )
 }
