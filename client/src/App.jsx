@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Box, Spinner } from '@chakra-ui/react';
 import { HomePage } from './pages/HomePage';
+import { ContactPage } from './pages/ContactPage/ContactPage';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
@@ -59,6 +60,7 @@ function AppContent() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/visit" element={<VisitPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </Suspense>
       <Footer />
