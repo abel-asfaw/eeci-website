@@ -13,6 +13,7 @@ export function Services({ bg }) {
     <Section
       bg={bg}
       size="lg"
+      label={section?.label}
       title={section?.title}
       isLoading={isLoading}
       isError={isError}
