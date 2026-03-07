@@ -1,35 +1,43 @@
+import { Box } from '@chakra-ui/react';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Section, ContentCarousel } from '../ui';
-import { useSiteSettings } from '../../hooks/useSiteSettings';
-import { useTeachingsCarousel } from '../../hooks/useTeachingsCarousel';
-import { Text } from '@chakra-ui/react';
+import { useSection } from '../../hooks/usePage';
+import { richTextOptions } from '../../utils/richText';
 
 export function WhatWeTeach({ bg }) {
-  const { data: siteSettings } = useSiteSettings();
-  const {
-    data: teachingPoints = [],
-    isLoading,
-    isError,
-  } = useTeachingsCarousel();
+  const { data: section, isLoading, isError } = useSection(
+    'about',
+    'what-we-teach',
+  );
+
+  const items =
+    section?.carousels?.[0]?.items?.map((card) => ({
+      title: card.title,
+      description: card.description,
+    })) ?? [];
 
   return (
     <Section
+      id="what-we-teach"
       bg={bg}
-      title="What We Teach"
+      title={section?.title}
       isLoading={isLoading}
       isError={isError}
       skeletonHeight="300px"
     >
-      <Text
-        fontSize="md"
-        color="text.secondary"
-        textAlign="center"
-        lineHeight="1.8"
-        marginBottom="6"
-      >
-        {siteSettings?.teachingStatement}
-      </Text>
+      {section?.body && (
+        <Box
+          fontSize="md"
+          color="text.secondary"
+          textAlign="center"
+          lineHeight="1.8"
+          marginBottom="6"
+        >
+          {documentToReactComponents(section.body, richTextOptions)}
+        </Box>
+      )}
 
-      <ContentCarousel items={teachingPoints} />
+      <ContentCarousel items={items} />
     </Section>
   );
 }

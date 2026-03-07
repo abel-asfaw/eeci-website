@@ -22,6 +22,7 @@ export function Section({
   paddingX = '6',
   textAlign = 'center',
   // Heading props
+  label,
   title,
   headingAs = 'h2',
   headingSize = '2rem',
@@ -34,6 +35,7 @@ export function Section({
   justifyContent = 'center',
   // Content
   children,
+  ...rest
 }) {
   const maxWidth = containerSizes[size] || size;
 
@@ -45,8 +47,21 @@ export function Section({
       paddingY={paddingY}
       paddingX={{ base: 2, md: paddingX }}
       justifyItems={justifyContent}
+      {...rest}
     >
       <Container maxWidth={maxWidth}>
+        {label && (
+          <Text
+            fontSize="sm"
+            fontWeight="600"
+            textTransform="uppercase"
+            letterSpacing="wider"
+            color="text.muted"
+            marginBottom="2"
+          >
+            {label}
+          </Text>
+        )}
         {title && (
           <Heading
             as={headingAs}

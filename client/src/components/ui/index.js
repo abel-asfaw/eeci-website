@@ -4,6 +4,5 @@ export { FeatureCard } from './FeatureCard';
 export { SocialIconButton } from './SocialIconButton';
 export { ContentCarousel } from './ContentCarousel';
 export { OverlayCarousel } from './OverlayCarousel';
-export { markdownStyles } from './markdownStyles';
 export { CarouselNavButton } from './CarouselNavButton';
 export { ExternalLink } from './ExternalLink';

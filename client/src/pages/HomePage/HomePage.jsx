@@ -1,4 +1,5 @@
 import { Box } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { Intro } from '../../components/Intro';
 import { Sermon } from '../../components/Sermon';
@@ -6,41 +7,54 @@ import { About } from '../../components/About';
 import { Beliefs } from '../../components/Beliefs';
 import { Verse } from '../../components/Verse';
 import { Services } from '../../components/Services';
-import { useSiteSettings } from '../../hooks/useSiteSettings';
+import { useSiteConfig } from '../../hooks/useSiteConfig';
+import { usePage } from '../../hooks/usePage';
 import { OutlineButton } from '../../components/ui';
 import { SEO } from '../../components/SEO';
-import { PAGE_META } from '../../constants/seo';
-import { CHURCH_INFO } from '../../constants';
-
-const churchJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Church',
-  name: CHURCH_INFO.fullName,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '1010 Saters Ln',
-    addressLocality: 'Timonium',
-    addressRegion: 'MD',
-    postalCode: '21093',
-    addressCountry: 'US',
-  },
-  url: 'https://eecimd.org',
-};
+import { SEO_DEFAULTS } from '../../constants/seo';
 
 export function HomePage() {
-  const { data: siteSettings } = useSiteSettings();
+  const { data: page } = usePage('home');
+  const { data: siteConfig } = useSiteConfig();
+
+  const churchJsonLd = siteConfig
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Church',
+        name: siteConfig.fullName,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: siteConfig.address,
+          addressLocality: 'Timonium',
+          addressRegion: 'MD',
+          postalCode: '21093',
+          addressCountry: 'US',
+        },
+        url: SEO_DEFAULTS.siteUrl,
+      }
+    : null;
 
   return (
     <Box as="main" id="main-content">
-      <SEO {...PAGE_META.home} />
-      <script type="application/ld+json">{JSON.stringify(churchJsonLd)}</script>
+      {page?.seo && <SEO {...page.seo} path="/" />}
+      {churchJsonLd && (
+        <script type="application/ld+json">
+          {JSON.stringify(churchJsonLd)}
+        </script>
+      )}
       <Intro
-        title="Emmanuel Evangelical Church International"
+        title={page?.hero?.title}
         titleSize="3.5rem"
-        subtitle="You are so special and God LOVES you so much!"
-        backgroundImage={siteSettings?.backgroundImage}
+        subtitle={page?.hero?.subtitle}
+        backgroundImage={page?.hero?.backgroundImage}
       >
-        <OutlineButton inverted>I'M NEW</OutlineButton>
+        {page?.hero?.ctaLabel && (
+          <OutlineButton inverted asChild>
+            <RouterLink to={page.hero.ctaLink ?? '/visit'}>
+              {page.hero.ctaLabel}
+            </RouterLink>
+          </OutlineButton>
+        )}
       </Intro>
       <About bg="bg.secondary" />
       <Sermon bg="bg.primary" />

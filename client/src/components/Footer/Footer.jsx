@@ -1,16 +1,16 @@
 import { Box, Button, HStack, Link, Text } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { SocialIconButton } from '../ui';
-import { useSiteSettings } from '../../hooks/useSiteSettings';
+import { useSiteConfig } from '../../hooks/useSiteConfig';
 import { useLocale } from '../../hooks/useLocale';
-import { NAVIGATION_LINKS, CHURCH_INFO, ERROR_MESSAGES } from '../../constants';
+import { NAVIGATION_LINKS, ERROR_MESSAGES } from '../../constants';
 import { buildSocialLinks } from '../../constants/socialLinks';
 
 export function Footer() {
-  const { data: siteSettings, isLoading, isError } = useSiteSettings();
+  const { data: siteConfig, isLoading, isError } = useSiteConfig();
   const { locale, toggleLocale } = useLocale();
 
-  const socialLinks = buildSocialLinks(siteSettings);
+  const socialLinks = buildSocialLinks(siteConfig);
 
   return (
     <Box as="footer" textAlign="center" paddingY="8" paddingX="6">
@@ -41,7 +41,7 @@ export function Footer() {
               </Link>
             ))}
             <Link
-              href={siteSettings?.giveLink}
+              href={siteConfig?.giveLink}
               target="_blank"
               color="text.secondary"
               textDecoration="none"
@@ -62,7 +62,7 @@ export function Footer() {
         </>
       )}
       <Text color="text.secondary" fontSize="sm">
-        © {CHURCH_INFO.copyrightYear} {CHURCH_INFO.name}
+        © {new Date().getFullYear()} {siteConfig?.churchName ?? 'EECI'}
       </Text>
     </Box>
   );
