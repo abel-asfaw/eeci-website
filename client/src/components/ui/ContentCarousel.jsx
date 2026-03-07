@@ -1,4 +1,4 @@
-import { Box, VStack, Heading, Text } from '@chakra-ui/react';
+import { Box, VStack, Heading, Image, Text } from '@chakra-ui/react';
 import { Carousel } from '@chakra-ui/react';
 import { CarouselNavButton } from './CarouselNavButton';
 
@@ -26,7 +26,14 @@ export function ContentCarousel({ items }) {
                 height="100%"
               >
                 <VStack gap="4" paddingX="8" paddingY="12" textAlign="center">
-                  {item.title && (
+                  {item.icon && (
+                    <Image
+                      src={item.icon}
+                      alt={item.title || ''}
+                      height="48px"
+                    />
+                  )}
+                  {item.title && !item.icon && (
                     <Heading
                       as="h4"
                       fontSize="1.5rem"

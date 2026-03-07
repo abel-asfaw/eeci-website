@@ -1,29 +1,35 @@
 import { SimpleGrid } from '@chakra-ui/react';
 import { OverlayCarousel, Section } from '../ui';
-import { useSiteSettings } from '../../hooks/useSiteSettings';
-import { useServiceCarousels } from '../../hooks/useServiceCarousels';
+import { useSection } from '../../hooks/usePage';
+import { usePage } from '../../hooks/usePage';
 
 export function Services({ bg }) {
-  const { data: siteSettings } = useSiteSettings();
-  const { data: carousels } = useServiceCarousels();
+  const { data: section, isLoading, isError } = useSection('home', 'services');
+  const { data: page } = usePage('home');
 
-  const backgroundImage = siteSettings?.backgroundImage;
+  const fallbackImage = page?.hero?.backgroundImage;
 
   return (
-    <Section bg={bg} size="lg" title="Get Involved">
+    <Section
+      bg={bg}
+      size="lg"
+      title={section?.title}
+      isLoading={isLoading}
+      isError={isError}
+    >
       <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 6, md: 8 }}>
-        {carousels
-          ?.sort((carousel) => carousel.order)
-          .map((carousel) => (
-            <OverlayCarousel
-              key={carousel.id}
-              items={carousel.cards.map((card) => ({
-                ...card,
-                // Use card's background image, fallback to siteSettings background
-                backgroundImage: card.backgroundImage ?? backgroundImage,
-              }))}
-            />
-          ))}
+        {section?.carousels?.map((carousel) => (
+          <OverlayCarousel
+            key={carousel.id}
+            items={carousel.items.map((card) => ({
+              id: card.id,
+              title: card.title,
+              subtitle: card.subtitle,
+              description: card.description,
+              backgroundImage: card.image ?? fallbackImage,
+            }))}
+          />
+        ))}
       </SimpleGrid>
     </Section>
   );
