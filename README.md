@@ -22,12 +22,6 @@ The current website feels outdated, has inconsistencies in design, and lacks cla
 - Church members seeking announcements, livestreams, or contact info
 - Volunteers managing church news, media, or events
 
-Pain Points:
-- Outdated visuals
-- Poor mobile responsiveness
-- Confusing content layout
-- Hard-to-find information
-
 ---
 
 ## 🎯 Objectives
@@ -50,8 +44,9 @@ Pain Points:
 - GitHub repository initialized ✅
 - WordPress chosen for CMS ✅
 - Project planning started on ClickUp ✅
-- Selecting a new theme and reviewing what to keep or change on the site 🔄
-
+- Selecting a new theme and reviewing what to keep or change on the site ✅
+- Home, About, Visit Pages are up to date and completed✅
+- Need to finish the Contact Page and add background to About Page⌛
 
 ## 🔗 Resources
 
@@ -68,6 +63,5 @@ Pain Points:
 - Nathan
 - Joshua
 - Alazar
-- Naomie
 
 ## 🙏 Let’s build something beautiful for His glory.
