@@ -26,14 +26,14 @@ export function ContentCarousel({ items }) {
                 height="100%"
               >
                 <VStack gap="4" paddingX="8" paddingY="12" textAlign="center">
-                  {item.icon && (
+                  {item.titleIcon && (
                     <Image
-                      src={item.icon}
+                      src={item.titleIcon}
                       alt={item.title || ''}
                       height="48px"
                     />
                   )}
-                  {item.title && !item.icon && (
+                  {item.title && !item.titleIcon && (
                     <Heading
                       as="h4"
                       fontSize="1.5rem"

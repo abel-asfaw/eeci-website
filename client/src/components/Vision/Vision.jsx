@@ -11,6 +11,7 @@ export function Vision({ bg }) {
     section?.carousels?.[0]?.items?.map((card) => ({
       title: card.title,
       description: card.description,
+      titleIcon: card.titleIcon,
     })) ?? [];
 
   return (
