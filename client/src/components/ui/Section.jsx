@@ -32,7 +32,6 @@ export function Section({
   errorMessage,
   skeletonHeight = '60px',
   skeletonProps,
-  justifyContent = 'center',
   justifyItems = 'center',
   // Content
   children,
@@ -43,11 +42,11 @@ export function Section({
   return (
     <Box
       as="section"
+      display="grid"
       background={bg}
       textAlign={textAlign}
       paddingY={paddingY}
       paddingX={{ base: 2, md: paddingX }}
-      justifyContent={justifyContent}
       justifyItems={justifyItems}
       {...rest}
     >
