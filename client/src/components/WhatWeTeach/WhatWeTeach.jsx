@@ -20,6 +20,7 @@ export function WhatWeTeach({ bg }) {
     <Section
       id="what-we-teach"
       bg={bg}
+      label={section?.label}
       title={section?.title}
       isLoading={isLoading}
       isError={isError}

@@ -19,7 +19,7 @@ function normalizeCard(card) {
     image: optimizeContentfulImage(
       (f.image ?? f.backgroundImage)?.fields?.file?.url,
     ),
-    icon: optimizeContentfulImage(f.icon?.fields?.file?.url),
+    titleIcon: optimizeContentfulImage(f.titleIcon?.fields?.file?.url),
   };
 }
 
@@ -39,13 +39,24 @@ function normalizeSection(entry) {
 
   switch (type) {
     case 'textSection':
-      return { ...base, title: fields.title, body: fields.body };
+      return {
+        ...base,
+        title: fields.title,
+        label: fields.label,
+        body: fields.body,
+      };
     case 'embedSection':
-      return { ...base, title: fields.title, embedUrl: fields.embedUrl };
+      return {
+        ...base,
+        title: fields.title,
+        label: fields.label,
+        embedUrl: fields.embedUrl,
+      };
     case 'carouselSection':
       return {
         ...base,
         title: fields.title,
+        label: fields.label,
         body: fields.body,
         carousels: fields.carousels?.map(normalizeCarousel) ?? [],
       };

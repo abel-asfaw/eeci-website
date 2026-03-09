@@ -10,6 +10,7 @@ export function About({ bg }) {
   return (
     <Section
       bg={bg}
+      label={section?.label}
       title={section?.title}
       isLoading={isLoading}
       isError={isError}

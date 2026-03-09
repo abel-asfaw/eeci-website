@@ -32,7 +32,7 @@ export function Section({
   errorMessage,
   skeletonHeight = '60px',
   skeletonProps,
-  justifyContent = 'center',
+  justifyItems = 'center',
   // Content
   children,
   ...rest
@@ -42,14 +42,15 @@ export function Section({
   return (
     <Box
       as="section"
+      display="grid"
       background={bg}
       textAlign={textAlign}
       paddingY={paddingY}
       paddingX={{ base: 2, md: paddingX }}
-      justifyItems={justifyContent}
+      justifyItems={justifyItems}
       {...rest}
     >
-      <Container maxWidth={maxWidth}>
+      <Container maxWidth={maxWidth} minWidth={0}>
         {label && (
           <Text
             fontSize="sm"

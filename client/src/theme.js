@@ -6,10 +6,15 @@ const config = defineConfig({
       margin: 0,
       padding: 0,
       fontSize: '18px',
+      fontFamily: "'noto-sans-ethiopic', sans-serif",
     },
   },
   theme: {
     tokens: {
+      fonts: {
+        heading: { value: "'noto-sans-ethiopic', sans-serif" },
+        body: { value: "'noto-sans-ethiopic', sans-serif" },
+      },
       colors: {
         brand: {
           50: { value: '#f9f9f9' },

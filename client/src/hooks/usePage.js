@@ -4,6 +4,7 @@ import { useLocale } from './useLocale';
 
 export function usePage(slug) {
   const { locale } = useLocale();
+
   return useQuery({
     queryKey: ['page', slug, locale],
     queryFn: () => fetchPage(slug, locale),
@@ -12,6 +13,7 @@ export function usePage(slug) {
 
 export function useSection(pageSlug, sectionId) {
   const { locale } = useLocale();
+
   return useQuery({
     queryKey: ['page', pageSlug, locale],
     queryFn: () => fetchPage(pageSlug, locale),

@@ -17,6 +17,11 @@ export function LocaleProvider({ children }) {
     setLocale((prev) => {
       const next = prev === AMHARIC ? ENGLISH : AMHARIC;
       localStorage.setItem(LOCALE_KEY, next);
+      if (window.gtag) {
+        window.gtag('event', 'language_toggle', {
+          language_selected: next === AMHARIC ? 'amharic' : 'english',
+        });
+      }
       return next;
     });
   };
