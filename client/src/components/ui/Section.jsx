@@ -50,7 +50,7 @@ export function Section({
       justifyItems={justifyItems}
       {...rest}
     >
-      <Container maxWidth={maxWidth}>
+      <Container maxWidth={maxWidth} minWidth={0}>
         {label && (
           <Text
             fontSize="sm"
