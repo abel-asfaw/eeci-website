@@ -10,12 +10,12 @@ import {
 } from '@chakra-ui/react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { LuMenu, LuX } from 'react-icons/lu';
-import { useSiteSettings } from '../../hooks/useSiteSettings';
+import { useSiteConfig } from '../../hooks/useSiteConfig';
 import { NAVIGATION_LINKS } from '../../constants';
 import { OutlineButton, ExternalLink } from '../ui';
 
 export function Navbar() {
-  const { data: siteSettings, isLoading, isError } = useSiteSettings();
+  const { data: siteConfig, isLoading, isError } = useSiteConfig();
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -126,7 +126,7 @@ export function Navbar() {
               asChild
               disabled={isLoading || isError}
             >
-              <ExternalLink href={siteSettings?.giveLink} disabled={isError}>
+              <ExternalLink href={siteConfig?.giveLink} disabled={isError}>
                 Give
               </ExternalLink>
             </OutlineButton>
