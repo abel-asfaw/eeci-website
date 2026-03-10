@@ -5,15 +5,18 @@ import { CoreValues } from '../../components/CoreValues';
 import { WhatWeTeach } from '../../components/WhatWeTeach';
 import { MeetOurTeam } from '../../components/MeetOurTeam';
 import { SEO } from '../../components/SEO';
-import { PAGE_META } from '../../constants/seo';
+import { usePage } from '../../hooks/usePage';
 
 export function AboutPage() {
+  const { data: page } = usePage('about');
+
   return (
     <Box as="main" id="main-content">
-      <SEO {...PAGE_META.about} />
+      {page?.seo && <SEO {...page.seo} path="/about" />}
       <Intro
-        title="About Us"
-        subtitle="Learn more about our vision, our values, and what we teach."
+        title={page?.hero?.title}
+        subtitle={page?.hero?.subtitle}
+        backgroundImage={page?.hero?.backgroundImage}
       />
       <Vision bg="bg.secondary" />
       <CoreValues bg="bg.primary" />

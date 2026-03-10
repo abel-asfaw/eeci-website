@@ -1,38 +1,41 @@
+import { Box } from '@chakra-ui/react';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Section, ContentCarousel } from '../ui';
-import { useSiteSettings } from '../../hooks/useSiteSettings';
-import { Text } from '@chakra-ui/react';
+import { useSection } from '../../hooks/usePage';
+import { richTextOptions } from '../../utils/richText';
 
 export function Vision({ bg }) {
-  const { data: siteSettings, isLoading, isError } = useSiteSettings();
-  const ourVisionJson = siteSettings?.ourVisionJson || [];
+  const { data: section, isLoading, isError } = useSection('about', 'vision');
+
+  const items =
+    section?.carousels?.[0]?.items?.map((card) => ({
+      title: card.title,
+      description: card.description,
+      titleIcon: card.titleIcon,
+    })) ?? [];
 
   return (
     <Section
       bg={bg}
-      title="Our Vision"
+      label={section?.label}
+      title={section?.title}
       isLoading={isLoading}
       isError={isError}
       skeletonHeight="300px"
     >
-      <Text
-        fontSize="md"
-        color="text.secondary"
-        textAlign="center"
-        lineHeight="1.8"
-        marginBottom="6"
-      >
-        {ourVisionJson?.visionStatement}
-      </Text>
+      {section?.body && (
+        <Box
+          fontSize="md"
+          color="text.secondary"
+          textAlign="center"
+          lineHeight="1.8"
+          marginBottom="6"
+        >
+          {documentToReactComponents(section.body, richTextOptions)}
+        </Box>
+      )}
 
-      <Text
-        fontSize="md"
-        fontWeight="600"
-        color="text.primary"
-        marginBottom="4"
-      >
-        {ourVisionJson?.visionSegway}
-      </Text>
-      <ContentCarousel items={ourVisionJson?.visionPoints} />
+      <ContentCarousel items={items} />
     </Section>
   );
 }

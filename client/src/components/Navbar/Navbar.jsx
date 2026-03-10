@@ -46,7 +46,7 @@ export function Navbar() {
           <RouterLink to="/">
             <Image
               alt="EECI"
-              src={siteSettings?.logoImage}
+              src={siteConfig?.logo}
               height="60px"
               width="60px"
             />
@@ -69,7 +69,7 @@ export function Navbar() {
               asChild
               disabled={isLoading || isError}
             >
-              <ExternalLink href={siteSettings?.giveLink} disabled={isError}>
+              <ExternalLink href={siteConfig?.giveLink} disabled={isError}>
                 Give
               </ExternalLink>
             </OutlineButton>

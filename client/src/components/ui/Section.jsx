@@ -22,6 +22,7 @@ export function Section({
   paddingX = '6',
   textAlign = 'center',
   // Heading props
+  label,
   title,
   headingAs = 'h2',
   headingSize = '2rem',
@@ -31,22 +32,37 @@ export function Section({
   errorMessage,
   skeletonHeight = '60px',
   skeletonProps,
-  justifyContent = 'center',
+  justifyItems = 'center',
   // Content
   children,
+  ...rest
 }) {
   const maxWidth = containerSizes[size] || size;
 
   return (
     <Box
       as="section"
+      display="grid"
       background={bg}
       textAlign={textAlign}
       paddingY={paddingY}
-      paddingX={{ base: 0, md: paddingX }}
-      justifyItems={justifyContent}
+      paddingX={{ base: 2, md: paddingX }}
+      justifyItems={justifyItems}
+      {...rest}
     >
-      <Container maxWidth={maxWidth}>
+      <Container maxWidth={maxWidth} minWidth={0}>
+        {label && (
+          <Text
+            fontSize="sm"
+            fontWeight="600"
+            textTransform="uppercase"
+            letterSpacing="wider"
+            color="text.muted"
+            marginBottom="2"
+          >
+            {label}
+          </Text>
+        )}
         {title && (
           <Heading
             as={headingAs}

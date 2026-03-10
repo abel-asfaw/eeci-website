@@ -1,24 +1,29 @@
 import { Box } from '@chakra-ui/react';
-import ReactMarkdown from 'react-markdown';
-import { Section, markdownStyles } from '../ui';
-import { useSiteSettings } from '../../hooks/useSiteSettings';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Section } from '../ui';
+import { useSection } from '../../hooks/usePage';
+import { richTextOptions } from '../../utils/richText';
 
 export function CoreValues({ bg }) {
-  const { data: siteSettings, isLoading, isError } = useSiteSettings();
+  const { data: section, isLoading, isError } = useSection(
+    'about',
+    'core-values',
+  );
 
   return (
     <Section
       bg={bg}
-      title="Our Values"
+      label={section?.label}
+      title={section?.title}
       isLoading={isLoading}
       isError={isError}
       skeletonHeight="100px"
     >
-      <Box fontSize="md" color="text.secondary" lineHeight="1.8">
-        <ReactMarkdown components={markdownStyles}>
-          {siteSettings?.ourValues}
-        </ReactMarkdown>
-      </Box>
+      {section?.body && (
+        <Box fontSize="md" color="text.secondary" lineHeight="1.8">
+          {documentToReactComponents(section.body, richTextOptions)}
+        </Box>
+      )}
     </Section>
   );
 }

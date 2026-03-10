@@ -1,26 +1,39 @@
-import { Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Section, OutlineButton } from '../ui';
-import { useSiteSettings } from '../../hooks/useSiteSettings';
+import { useSection } from '../../hooks/usePage';
 import { useNavigate } from 'react-router-dom';
+import { richTextOptions } from '../../utils/richText';
 
 export function Beliefs({ bg }) {
-  const { data: siteSettings, isLoading, isError } = useSiteSettings();
+  const { data: section, isLoading, isError } = useSection('home', 'beliefs');
   const navigate = useNavigate();
 
   return (
     <Section
       bg={bg}
-      label="WHAT WE BELIEVE"
-      title="Our Beliefs"
+      label={section?.label}
+      title={section?.title}
       isLoading={isLoading}
       isError={isError}
     >
-      <Text fontSize="md" color="text.secondary" marginBottom="8">
-        {siteSettings?.beliefsText}
-      </Text>
-      <OutlineButton backgroundColor="white" onClick={() => navigate('/about')}>
-        LEARN MORE
-      </OutlineButton>
+      {section?.body && (
+        <Box fontSize="md" color="text.secondary" marginBottom="8">
+          {documentToReactComponents(section.body, richTextOptions)}
+        </Box>
+      )}
+      {section?.ctaLabel && (
+        <OutlineButton
+          backgroundColor="white"
+          onClick={() =>
+            navigate(section.ctaLink ?? '/about', {
+              state: { scrollTo: 'what-we-teach' },
+            })
+          }
+        >
+          {section.ctaLabel}
+        </OutlineButton>
+      )}
     </Section>
   );
 }

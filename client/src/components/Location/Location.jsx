@@ -1,24 +1,39 @@
-import ReactMarkdown from 'react-markdown';
-import { Section, OutlineButton, ExternalLink, markdownStyles } from '../ui';
-import { useVisitSettings } from '../../hooks/useVisitSettings';
+import { Box } from '@chakra-ui/react';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Section, OutlineButton, ExternalLink } from '../ui';
+import { useSection } from '../../hooks/usePage';
+import { richTextOptions } from '../../utils/richText';
 
-export function Location({ title, bg }) {
-  const { data: visitSettings, isLoading, isError } = useVisitSettings();
+export function Location({ bg }) {
+  const { data: section, isLoading, isError } = useSection(
+    'visit',
+    'location',
+  );
 
   return (
-    <Section bg={bg} title={title} isLoading={isLoading} isError={isError}>
-      <ReactMarkdown components={markdownStyles}>
-        {visitSettings?.locationTimesText}
-      </ReactMarkdown>
-      <OutlineButton color="gray.900" asChild disabled={isLoading || isError}>
-        <ExternalLink
-          href={visitSettings?.directionsLink}
-          textDecoration="none"
-          disabled={isError}
-        >
-          GET DIRECTIONS
-        </ExternalLink>
-      </OutlineButton>
+    <Section
+      bg={bg}
+      label={section?.label}
+      title={section?.title}
+      isLoading={isLoading}
+      isError={isError}
+    >
+      {section?.body && (
+        <Box fontSize="md" color="text.secondary">
+          {documentToReactComponents(section.body, richTextOptions)}
+        </Box>
+      )}
+      {section?.ctaLabel && (
+        <OutlineButton color="gray.900" asChild disabled={isLoading || isError}>
+          <ExternalLink
+            href={section.ctaLink}
+            textDecoration="none"
+            disabled={isError}
+          >
+            {section.ctaLabel}
+          </ExternalLink>
+        </OutlineButton>
+      )}
     </Section>
   );
 }

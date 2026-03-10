@@ -1,7 +1,3 @@
-/**
- * YouTube API service for fetching playlist and video data
- */
-
 import contentfulClient from '../clients';
 
 function optimizeContentfulImage(url, { quality, width, height } = {}) {
@@ -13,113 +9,136 @@ function optimizeContentfulImage(url, { quality, width, height } = {}) {
   return `${url}${separator}${params.join('&')}`;
 }
 
-export async function fetchSiteSettings() {
+function normalizeCard(card) {
+  const f = card.fields;
+  return {
+    id: card.sys.id,
+    title: f.title,
+    subtitle: f.subtitle,
+    description: f.description,
+    image: optimizeContentfulImage(
+      (f.image ?? f.backgroundImage)?.fields?.file?.url,
+    ),
+    titleIcon: optimizeContentfulImage(f.titleIcon?.fields?.file?.url),
+  };
+}
+
+function normalizeCarousel(carousel) {
+  const f = carousel.fields;
+  return {
+    id: carousel.sys.id,
+    name: f.name ?? f.title,
+    items: (f.items ?? f.cards)?.map(normalizeCard) ?? [],
+  };
+}
+
+function normalizeSection(entry) {
+  const type = entry.sys.contentType.sys.id;
+  const fields = entry.fields;
+  const base = { sectionId: fields.sectionId, type };
+
+  switch (type) {
+    case 'textSection':
+      return {
+        ...base,
+        title: fields.title,
+        label: fields.label,
+        body: fields.body,
+      };
+    case 'embedSection':
+      return {
+        ...base,
+        title: fields.title,
+        label: fields.label,
+        embedUrl: fields.embedUrl,
+      };
+    case 'carouselSection':
+      return {
+        ...base,
+        title: fields.title,
+        label: fields.label,
+        body: fields.body,
+        carousels: fields.carousels?.map(normalizeCarousel) ?? [],
+      };
+    case 'ctaSection':
+      return {
+        ...base,
+        title: fields.title,
+        label: fields.label,
+        body: fields.body,
+        ctaLabel: fields.ctaLabel,
+        ctaLink: fields.ctaLink,
+      };
+    default:
+      return base;
+  }
+}
+
+function normalizePage(entry) {
+  const fields = entry.fields;
+  return {
+    slug: fields.slug,
+    hero: {
+      title: fields.heroTitle,
+      subtitle: fields.heroSubtitle,
+      backgroundImage: optimizeContentfulImage(
+        fields.heroBackgroundImage?.fields?.file?.url,
+      ),
+      ctaLabel: fields.heroCtaLabel,
+      ctaLink: fields.heroCtaLink,
+    },
+    seo: {
+      title: fields.seoTitle,
+      description: fields.seoDescription,
+      keywords: fields.seoKeywords,
+    },
+    sections: fields.sections?.map(normalizeSection) ?? [],
+  };
+}
+
+export async function fetchSiteConfig(locale) {
   const response = await contentfulClient.getEntries({
-    content_type: 'siteSettings',
+    content_type: 'siteConfig',
     limit: 1,
+    locale,
   });
 
-  if (!response) {
-    throw new Error('Failed to fetch site settings');
-  }
-
-  if (response.items.length === 0) {
-    console.warn('[Contentful] No siteSettings entries found, using defaults');
+  if (!response || response.items.length === 0) {
+    console.warn('[Contentful] No siteConfig entry found');
     return {};
   }
 
-  const siteSettings = response.items[0].fields;
-
-  // Contentful media assets have nested structure: asset.fields.file.url
-  const backgroundImageUrl = siteSettings.backgroundImage?.fields?.file?.url;
-  const logoImageUrl = siteSettings.logoImage?.fields?.file?.url;
-
+  const fields = response.items[0].fields;
   return {
-    giveLink: siteSettings.giveLink,
-    sermonsPlaylist: siteSettings.sermonsPlaylist,
-    aboutText: siteSettings.aboutText,
-    beliefsText: siteSettings.beliefsText,
-    facebookUrl: siteSettings.facebookUrl,
-    instagramUrl: siteSettings.instagramUrl,
-    youtubeUrl: siteSettings.youtubeUrl,
-    tiktokUrl: siteSettings.tiktokUrl,
-    missionTagline: siteSettings.missionTagline,
-    valuesJson: siteSettings.valuesJson,
-    historyText: siteSettings.historyText,
-    ourVisionJson: siteSettings.ourVisionJson,
-    ourValues: siteSettings.ourValues,
-    teachingsJson: siteSettings.teachingsJson,
-    teamMembersJson: siteSettings.teamMembersJson?.map((member) => ({
-      ...member,
-      photo: optimizeContentfulImage(member.photo),
-    })),
-    backgroundImage: optimizeContentfulImage(backgroundImageUrl),
-    logoImage: optimizeContentfulImage(logoImageUrl, {
+    churchName: fields.churchName,
+    fullName: fields.fullName,
+    address: fields.address,
+    serviceTimes: fields.serviceTimes,
+    mapsUrl: fields.mapsUrl,
+    logo: optimizeContentfulImage(fields.logo?.fields?.file?.url, {
       width: 200,
       height: 200,
     }),
+    giveLink: fields.giveLink,
+    facebookUrl: fields.facebookUrl,
+    instagramUrl: fields.instagramUrl,
+    youtubeUrl: fields.youtubeUrl,
+    tiktokUrl: fields.tiktokUrl,
   };
 }
 
-export async function fetchServiceCarousels() {
+export async function fetchPage(slug, locale) {
   const response = await contentfulClient.getEntries({
-    content_type: 'serviceCarousel',
-    order: 'fields.order',
-  });
-
-  if (!response) {
-    throw new Error('Failed to fetch service carousels');
-  }
-
-  if (response.items.length === 0) {
-    console.warn('[Contentful] No serviceCarousel entries found');
-    return [];
-  }
-
-  return response.items.map((carousel) => ({
-    id: carousel.sys.id,
-    title: carousel.fields.title,
-    order: carousel.fields.order,
-    cards:
-      carousel.fields.cards?.map((card) => ({
-        id: card.sys.id,
-        title: card.fields.title,
-        subtitle: card.fields.subtitle,
-        description: card.fields.description,
-        backgroundImage: optimizeContentfulImage(
-          card.fields.backgroundImage?.fields?.file?.url,
-        ),
-      })) ?? [],
-  }));
-}
-
-export async function fetchVisitSettings() {
-  const response = await contentfulClient.getEntries({
-    content_type: 'visitSettings',
+    content_type: 'page',
+    'fields.slug': slug,
+    include: 3,
     limit: 1,
+    locale,
   });
 
-  if (!response) {
-    throw new Error('Failed to fetch visit settings');
+  if (!response || response.items.length === 0) {
+    throw new Error(`Page "${slug}" not found`);
   }
 
-  if (response.items.length === 0) {
-    console.warn('[Contentful] No visitSettings entries found, using defaults');
-    return {};
-  }
-
-  const visitSettings = response.items[0].fields;
-
-  // Contentful media assets have nested structure: asset.fields.file.url
-  const backgroundImageUrl = visitSettings.backgroundImage?.fields?.file?.url;
-
-  const churchImageUrl = visitSettings.churchImage?.fields?.file?.url;
-
-  return {
-    directionsLink: visitSettings.directionsLink,
-    directionsEmbedLink: visitSettings.directionsEmbedLink,
-    locationTimesText: visitSettings.locationTimesText,
-    churchImage: optimizeContentfulImage(churchImageUrl),
-    backgroundImage: optimizeContentfulImage(backgroundImageUrl),
-  };
+  return normalizePage(response.items[0]);
 }
