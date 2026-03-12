@@ -4,6 +4,7 @@
 export const NAVIGATION_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Visit', href: '/visit' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 /**

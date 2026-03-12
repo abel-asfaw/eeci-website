@@ -142,3 +142,27 @@ export async function fetchPage(slug, locale) {
 
   return normalizePage(response.items[0]);
 }
+
+export async function fetchContactSettings() {
+  const response = await contentfulClient.getEntries({
+    content_type: 'contactSettings',
+    limit: 1,
+  });
+
+  if (!response) {
+    throw new Error('Failed to fetch contact settings');
+  }
+
+  if (response.items.length === 0) {
+    console.warn('[Contentful] No contactSettings entries found');
+    return {};
+  }
+
+  const contactSettings = response.items[0].fields;
+
+  return {
+    contactPage: contactSettings.contactPage,
+    connectWithChurchMessage:
+      contactSettings.connectWithChurchMessage,
+  };
+}
