@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
   Box,
+  Button,
   Flex,
   HStack,
   IconButton,
@@ -11,11 +12,13 @@ import {
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { LuMenu, LuX } from 'react-icons/lu';
 import { useSiteConfig } from '../../hooks/useSiteConfig';
+import { useLocale } from '../../hooks/useLocale';
 import { NAVIGATION_LINKS } from '../../constants';
 import { OutlineButton, ExternalLink } from '../ui';
 
 export function Navbar() {
   const { data: siteConfig, isLoading, isError } = useSiteConfig();
+  const { locale, toggleLocale } = useLocale();
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -63,6 +66,11 @@ export function Navbar() {
             </Box>
           ))}
           <Box as="li">
+            <Button variant="ghost" size="sm" onClick={toggleLocale} aria-label="Toggle language">
+              {locale === 'de-DE' ? '🇺🇸 EN' : '🇪🇹 አማ'}
+            </Button>
+          </Box>
+          <Box as="li">
             <OutlineButton
               color="white"
               backgroundColor="gray.900"
@@ -76,16 +84,20 @@ export function Navbar() {
           </Box>
         </HStack>
 
-        {/* Mobile hamburger */}
-        <IconButton
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          variant="ghost"
-          size="lg"
-          display={{ base: 'flex', md: 'none' }}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <LuX size={24} /> : <LuMenu size={24} />}
-        </IconButton>
+        {/* Mobile: language toggle + hamburger */}
+        <HStack display={{ base: 'flex', md: 'none' }}>
+          <Button variant="ghost" size="sm" onClick={toggleLocale} aria-label="Toggle language">
+            {locale === 'de-DE' ? '🇺🇸 EN' : '🇪🇹 አማ'}
+          </Button>
+          <IconButton
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            variant="ghost"
+            size="lg"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <LuX size={24} /> : <LuMenu size={24} />}
+          </IconButton>
+        </HStack>
       </Flex>
 
       {/* Mobile dropdown */}
